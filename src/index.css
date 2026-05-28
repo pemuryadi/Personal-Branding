@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  
+  --color-brand-50: #ffffff;
+  --color-brand-100: #a0a0a0;
+  --color-brand-500: #555555;
+  --color-brand-600: #222222;
+  --color-brand-700: #111111;
+  --color-brand-900: #0a0a0a;
+
+  --color-bg: #0a0a0a;
+  --color-ink: #ffffff;
+  --color-muted: #555555;
+  --color-border: #222222;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
