@@ -6,7 +6,8 @@ const ecosystemItems = [
     icon: BookOpen,
     title: "Generator KBM",
     description: "Pembuatan perangkat Kegiatan Belajar Mengajar secara otomatis dan terstruktur.",
-    stack: "WEBSITE & ai"
+    stack: "WEBSITE & ai",
+    comingSoon: true
   },
   {
     icon: FileSpreadsheet,
@@ -19,13 +20,15 @@ const ecosystemItems = [
     icon: ShieldCheck,
     title: "Asisten SNP",
     description: "Pengelolaan dan pemantauan Standar Nasional Pendidikan sekolah yang efisien.",
-    stack: "WEBSITE & ai"
+    stack: "WEBSITE & ai",
+    comingSoon: true
   },
   {
     icon: Box,
     title: "Produk Digital",
     description: "Kumpulan aset dan produk digital untuk mendukung transformasi pendidikan instansi.",
-    stack: "Market place"
+    stack: "Market place",
+    url: "https://lynk.id/pemuryadi"
   }
 ];
 
@@ -55,8 +58,13 @@ export function Ecosystem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`border border-border p-[25px] aspect-square flex flex-col justify-between bg-gradient-to-br from-card-from to-card-to hover:border-border-hover transition-colors duration-300 ${item.url ? 'cursor-pointer group block' : ''}`}
+              className={`border border-border p-[25px] aspect-square flex flex-col justify-between bg-gradient-to-br from-card-from to-card-to hover:border-border-hover transition-colors duration-300 relative ${item.url ? 'cursor-pointer group block' : ''}`}
             >
+              {item.comingSoon && (
+                <div className="absolute top-4 right-4 bg-gradient-to-r from-[#1e3a8a] to-[#581c87] text-[#e0e7ff] border border-[#3b82f6]/30 text-[9px] uppercase tracking-[0.15em] px-2.5 py-1 font-[900] rounded shadow-sm">
+                  COMING SOON
+                </div>
+              )}
               <div>
                 <span className="text-[18px] font-mono text-muted block mb-6 transition-colors duration-300">
                   [{index + 1 < 10 ? `0${index + 1}` : index + 1}]
