@@ -14,6 +14,7 @@ async function startServer() {
 
   // Cache the motivation for the day
   let cachedMotivation = "";
+  let cachedImagePrompt = "";
   let lastFetchDate = "";
 
   // API routes FIRST
@@ -25,21 +26,26 @@ async function startServer() {
     try {
       const today = new Date().toISOString().split("T")[0];
       
-      if (cachedMotivation && lastFetchDate === today) {
-        return res.json({ text: cachedMotivation });
+      if (cachedMotivation && cachedImagePrompt && lastFetchDate === today) {
+        return res.json({ text: cachedMotivation, imagePrompt: cachedImagePrompt });
       }
 
       const response = await ai.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: "Tuliskan satu paragraf kutipan motivasi mendalam untuk guru di seluruh dunia. Berikan dalam bahasa Indonesia, bisa juga menyertakan kutipan bahasa Inggris. Buatlah realistis dan menginspirasi, tanpa basa-basi berlebihan.",
+        contents: "Tuliskan satu paragraf kutipan motivasi mendalam untuk guru di seluruh dunia (berbahasa Indonesia). Berikan juga prompt bahasa Inggris singkat (1 kalimat) untuk meng-generate poster ilustrasi motivasi guru yang indah dengan gaya seni vektor/minimalis menggunakan warna biru dan ungu (blue and purple). Format response Anda harus berupa JSON valid dengan skema: { \"text\": \"motivasi\", \"imagePrompt\": \"prompt ilustrasi\" }",
+        config: {
+          responseMimeType: "application/json"
+        }
       });
 
       const text = response.text;
       
       if (text) {
-        cachedMotivation = text;
+        const parsed = JSON.parse(text);
+        cachedMotivation = parsed.text || "Guru adalah pelita harapan bangsa.";
+        cachedImagePrompt = parsed.imagePrompt || "inspiring minimalist teacher poster vector art blue purple";
         lastFetchDate = today;
-        return res.json({ text: cachedMotivation });
+        return res.json({ text: cachedMotivation, imagePrompt: cachedImagePrompt });
       } else {
         return res.status(500).json({ error: "No text generated" });
       }
