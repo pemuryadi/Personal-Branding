@@ -5,29 +5,61 @@
   --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-display: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   
-  --color-brand-50: #ffffff;
-  --color-brand-100: #a0a0a0;
-  --color-brand-500: #555555;
-  --color-brand-600: #222222;
-  --color-brand-700: #111111;
-  --color-brand-900: #0a0a0a;
+  --color-bg: var(--app-bg);
+  --color-ink: var(--app-ink);
+  --color-muted: var(--app-muted);
+  --color-border: var(--app-border);
+  
+  --color-card-from: var(--app-card-from);
+  --color-card-to: var(--app-card-to);
+  --color-border-hover: var(--app-border-hover);
+  
+  --color-btn-bg: var(--app-btn-bg);
+  --color-btn-text: var(--app-btn-text);
+  --color-btn-hover: var(--app-btn-hover);
+}
 
-  --color-bg: #0a0a0a;
-  --color-ink: #ffffff;
-  --color-muted: #555555;
-  --color-border: #222222;
+:root {
+  --app-bg: #ffffff;
+  --app-ink: #0a0a0a;
+  --app-muted: #666666;
+  --app-border: #e5e5e5;
+  
+  --app-card-from: #f8f8f8;
+  --app-card-to: #ffffff;
+  --app-border-hover: #cccccc;
+  
+  --app-btn-bg: #0a0a0a;
+  --app-btn-text: #ffffff;
+  --app-btn-hover: #333333;
+}
+
+.dark {
+  --app-bg: #0a0a0a;
+  --app-ink: #ffffff;
+  --app-muted: #555555;
+  --app-border: #222222;
+  
+  --app-card-from: #111111;
+  --app-card-to: #0a0a0a;
+  --app-border-hover: #444444;
+  
+  --app-btn-bg: #ffffff;
+  --app-btn-text: #0a0a0a;
+  --app-btn-hover: #a0a0a0;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-bg);
-  color: var(--color-ink);
+  background-color: var(--app-bg);
+  color: var(--app-ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-bg);
-  color: var(--color-ink);
+  background-color: var(--app-bg);
+  color: var(--app-ink);
 }
 
 h1, h2, h3, h4, h5, h6 {

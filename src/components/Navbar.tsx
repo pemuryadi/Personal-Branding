@@ -1,8 +1,17 @@
-import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const links = [
     { name: "Home", href: "#home" },
@@ -12,49 +21,70 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#0a0a0a] border-b border-[#222222] py-[15px]">
+    <header className="sticky top-0 z-50 w-full bg-bg border-b border-border py-[15px] transition-colors duration-300">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="flex items-end justify-between">
-          <div className="flex-shrink-0">
-            <a href="#home" className="text-[11px] font-[700] tracking-[0.3em] uppercase text-[#555555]">
-              Pemuryadi<span className="text-[#ffffff]">.dev</span>
+          <div className="flex-shrink-0 flex items-center">
+            <a href="#home" className="text-[18px] font-[700] tracking-[0.2em] uppercase text-muted transition-colors duration-300">
+              Pemuryadi<span className="text-ink transition-colors duration-300">.dev</span>
             </a>
           </div>
           
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-[40px]">
+          <div className="hidden md:flex items-center gap-10">
+            <div className="flex items-baseline space-x-[40px]">
               {links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-[#ffffff] text-[11px] font-[700] tracking-[0.2em] uppercase hover:text-[#a0a0a0] transition-colors"
+                  className="text-ink text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
                 >
                   {link.name}
                 </a>
               ))}
             </div>
+
+            <div className="flex items-center gap-2">
+              <Sun className={`w-5 h-5 ${!isDark ? 'text-ink' : 'text-muted'}`} />
+              <button 
+                onClick={() => setIsDark(!isDark)}
+                className="w-12 h-6 rounded-full bg-border relative transition-colors duration-300"
+                aria-label="Toggle Dark Mode"
+              >
+                <div className={`w-4 h-4 rounded-full bg-ink absolute top-1 transition-all duration-300 ${isDark ? 'right-1' : 'left-1'}`} />
+              </button>
+              <Moon className={`w-5 h-5 ${isDark ? 'text-ink' : 'text-muted'}`} />
+            </div>
           </div>
           
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => setIsDark(!isDark)}
+                className="w-12 h-6 rounded-full bg-border relative transition-colors duration-300"
+                aria-label="Toggle Dark Mode"
+              >
+                <div className={`w-4 h-4 rounded-full bg-ink absolute top-1 transition-all duration-300 ${isDark ? 'right-1' : 'left-1'}`} />
+              </button>
+            </div>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-[#ffffff] hover:text-[#a0a0a0] focus:outline-none"
+              className="p-2 rounded-md text-ink hover:text-muted focus:outline-none"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
             </button>
           </div>
         </div>
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-[#0a0a0a] border-t border-[#222222] mt-[15px]">
+        <div className="md:hidden bg-bg border-t border-border mt-[15px] transition-colors duration-300">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {links.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-3 py-2 text-[11px] font-[700] tracking-[0.2em] uppercase text-[#ffffff] hover:text-[#a0a0a0]"
+                className="block px-3 py-3 text-[18px] font-[700] tracking-[0.2em] uppercase text-ink hover:text-muted transition-colors duration-300"
               >
                 {link.name}
               </a>
