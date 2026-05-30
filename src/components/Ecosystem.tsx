@@ -7,7 +7,9 @@ const ecosystemItems = [
     title: "Generator KBM",
     description: "Pembuatan perangkat Kegiatan Belajar Mengajar secara otomatis dan terstruktur.",
     stack: "WEBSITE & ai",
-    comingSoon: true
+    comingSoon: true,
+    url: "https://razkadigital.my.canva.site/apk-gen-pemuryadi-v2",
+    hasTrial: true
   },
   {
     icon: FileSpreadsheet,
@@ -61,7 +63,7 @@ export function Ecosystem() {
               className={`border border-border p-[25px] aspect-square flex flex-col justify-between bg-gradient-to-br from-card-from to-card-to hover:border-border-hover transition-colors duration-300 relative ${item.url ? 'cursor-pointer group block' : ''}`}
             >
               {item.comingSoon && (
-                <div className="absolute top-4 right-4 bg-gradient-to-r from-[#1e3a8a] to-[#581c87] text-[#e0e7ff] border border-[#3b82f6]/30 text-[9px] uppercase tracking-[0.15em] px-2.5 py-1 font-[900] rounded shadow-sm">
+                <div className="absolute top-4 right-4 bg-gradient-to-r from-[#1e3a8a] to-[#581c87] text-[#e0e7ff] border border-[#3b82f6]/30 text-[9px] uppercase tracking-[0.15em] px-2.5 py-1 font-[900] rounded shadow-sm animate-pulse">
                   COMING SOON
                 </div>
               )}
@@ -72,6 +74,11 @@ export function Ecosystem() {
                 <item.icon className="w-8 h-8 text-ink mb-6 transition-colors duration-300" />
                 <h3 className={`text-[20px] font-[800] uppercase tracking-[1px] text-ink mb-4 transition-colors duration-300 ${item.url ? 'group-hover:underline' : ''}`}>{item.title}</h3>
                 <p className="text-[18px] leading-[1.6] text-muted m-0 transition-colors duration-300">{item.description}</p>
+                {item.hasTrial && (
+                  <span className="inline-block mt-4 text-[14px] font-bold uppercase tracking-[1px] text-blue-500 group-hover:text-blue-400 transition-colors duration-300">
+                    Coba Versi Trial ↗
+                  </span>
+                )}
               </div>
               <div className="text-[14px] font-bold uppercase tracking-[1px] text-muted mt-6 transition-colors duration-300">
                 {item.stack}
