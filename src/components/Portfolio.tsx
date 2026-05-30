@@ -34,7 +34,7 @@ export function Portfolio() {
               <h3 className="text-[20px] font-[800] uppercase tracking-[1px] text-ink mb-4 transition-colors duration-300 group-hover:underline">Web & Code Development</h3>
             </div>
             <p className="text-[18px] leading-[1.6] text-muted m-0 transition-colors duration-300 mt-4 md:mt-8">
-              Integrasi layanan Firebase, pengembangan dengan framework Laravel, serta perancangan sistem informasi manajemen sekolah yang terintegrasi dengan Google Cloud/Apps Script.
+              Integrasi Layanan Cloudflare, pengembangan dengan framework Vercel, Laravel, serta perancangan Sistem Informasi Manajemen sekolah yang terintegrasi dengan sistem otomatisasi data untuk menyederhanakan pelaporan, menghemat waktu guru, dan mempermudah pengambilan keputusan.
             </p>
           </motion.a>
 
