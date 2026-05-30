@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, RefreshCw } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
 
 export function Motivation() {
   const [motivation, setMotivation] = useState<string>('');
@@ -72,8 +71,8 @@ export function Motivation() {
                     </div>
                   </div>
                 ) : (
-                  <div className="text-[18px] md:text-[20px] leading-relaxed text-ink italic font-medium">
-                    <ReactMarkdown>{motivation}</ReactMarkdown>
+                  <div className="text-[18px] md:text-[20px] leading-relaxed text-ink italic font-medium whitespace-pre-line">
+                    {motivation}
                   </div>
                 )}
               </div>
