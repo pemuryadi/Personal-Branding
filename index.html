@@ -1,6 +1,42 @@
 <!doctype html>
 <html lang="id">
   <head>
+    <script>
+      // Bersihkan parameter pelacakan (seperti fbclid, utm_*, dll.) dari URL agar tampilan lebih rapi
+      (function() {
+        try {
+          var url = new URL(window.location.href);
+          var paramsToRemove = ['fbclid', 'gclid', 'wbraid', 'gbraid', 'msclkid'];
+          var updated = false;
+          
+          for (var i = 0; i < paramsToRemove.length; i++) {
+            var param = paramsToRemove[i];
+            if (url.searchParams.has(param)) {
+              url.searchParams.delete(param);
+              updated = true;
+            }
+          }
+          
+          var utmParams = [];
+          url.searchParams.forEach(function(value, key) {
+            if (key.indexOf('utm_') === 0) {
+              utmParams.push(key);
+            }
+          });
+          for (var j = 0; j < utmParams.length; j++) {
+            url.searchParams.delete(utmParams[j]);
+            updated = true;
+          }
+
+          if (updated) {
+            var cleanUrl = url.pathname + url.search + url.hash;
+            window.history.replaceState(null, '', cleanUrl);
+          }
+        } catch (e) {
+          console.error('Error cleaning URL parameters:', e);
+        }
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portofolio Praswara Eko Maryadi - EdTech, paperless, Google Apps Script, Kurikulum Merdeka" />
