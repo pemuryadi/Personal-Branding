@@ -45,6 +45,22 @@ const articles = [
   }
 ];
 
+const generateSlug = (text: string) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')       // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')   // Remove all non-word chars
+    .replace(/\-\-+/g, '-');    // Replace multiple - with single -
+};
+
+// Map articles to automatically generate a slug from the title
+const articlesWithSlug = articles.map(article => ({
+  ...article,
+  slug: generateSlug(article.title)
+}));
+
 export function ArticlePage() {
   const [hash, setHash] = useState(window.location.hash);
   const [showExitIntent, setShowExitIntent] = useState(false);
@@ -56,8 +72,8 @@ export function ArticlePage() {
   }, []);
 
   const isDetailView = hash.startsWith('#artikel/');
-  const articleId = isDetailView ? hash.replace('#artikel/', '') : null;
-  const activeArticle = articles.find(a => a.id === articleId);
+  const currentSlug = isDetailView ? hash.replace('#artikel/', '') : null;
+  const activeArticle = articlesWithSlug.find(a => a.slug === currentSlug);
 
   // Exit Intent Logic
   useEffect(() => {
@@ -191,10 +207,10 @@ export function ArticlePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {articles.map((article, idx) => (
+          {articlesWithSlug.map((article, idx) => (
             <motion.a
-              key={article.id}
-              href={`#artikel/${article.id}`}
+              key={article.slug}
+              href={`#artikel/${article.slug}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
