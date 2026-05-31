@@ -37,6 +37,63 @@
         }
       })();
     </script>
+    <script>
+      // Crop transparency from favicon dynamically so it fills the tab at standard size
+      (function() {
+        var img = new Image();
+        img.src = '/images/logo_square.png';
+        img.onload = function() {
+          try {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            
+            var imgData = ctx.getImageData(0, 0, img.width, img.height);
+            var data = imgData.data;
+            var minX = img.width, minY = img.height, maxX = 0, maxY = 0;
+            
+            for (var y = 0; y < img.height; y++) {
+              for (var x = 0; x < img.width; x++) {
+                var alpha = data[(y * img.width + x) * 4 + 3];
+                if (alpha > 10) {
+                  if (x < minX) minX = x;
+                  if (x > maxX) maxX = x;
+                  if (y < minY) minY = y;
+                  if (y > maxY) maxY = y;
+                }
+              }
+            }
+            
+            if (maxX >= minX && maxY >= minY) {
+              var cropWidth = maxX - minX + 1;
+              var cropHeight = maxY - minY + 1;
+              var size = Math.max(cropWidth, cropHeight);
+              
+              var cropCanvas = document.createElement('canvas');
+              cropCanvas.width = size;
+              cropCanvas.height = size;
+              var cropCtx = cropCanvas.getContext('2d');
+              
+              var dx = (size - cropWidth) / 2;
+              var dy = (size - cropHeight) / 2;
+              cropCtx.drawImage(img, minX, minY, cropWidth, cropHeight, dx, dy, cropWidth, cropHeight);
+              
+              var link = document.querySelector("link[rel*='icon']");
+              if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+              }
+              link.href = cropCanvas.toDataURL('image/png');
+            }
+          } catch (e) {
+            console.error('Error cropping favicon:', e);
+          }
+        };
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Portofolio Praswara Eko Maryadi - EdTech, paperless, Google Apps Script, Kurikulum Merdeka" />
@@ -51,9 +108,9 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pemuryadi.my.id" />
     
-    <title>Pemuryadi Digital | Portofolio</title>
-    <script type="module" crossorigin src="/assets/index-BGXMa06h.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Cx_Irsqa.css">
+    <title>pemuryadi</title>
+    <script type="module" crossorigin src="/assets/index-zW-rXGfA.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CgjiBQ6y.css">
   </head>
   <body class="antialiased">
     <div id="root"></div>

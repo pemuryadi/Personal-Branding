@@ -24,19 +24,101 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 // server.ts
 var import_express = __toESM(require("express"), 1);
 var import_path = __toESM(require("path"), 1);
+var import_fs = __toESM(require("fs"), 1);
 var import_vite = require("vite");
 var import_genai = require("@google/genai");
 var dotenv = __toESM(require("dotenv"), 1);
 dotenv.config();
 var ai = new import_genai.GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+var COUNT_FILE = import_path.default.join(process.cwd(), ".visitor_count.json");
+var totalVisitors = 142;
+try {
+  if (import_fs.default.existsSync(COUNT_FILE)) {
+    totalVisitors = JSON.parse(import_fs.default.readFileSync(COUNT_FILE, "utf-8")).total || 142;
+  } else {
+    import_fs.default.writeFileSync(COUNT_FILE, JSON.stringify({ total: totalVisitors }));
+  }
+} catch (e) {
+  console.error("Error loading visitor count:", e);
+}
+function incrementTotalVisitors() {
+  totalVisitors++;
+  try {
+    import_fs.default.writeFileSync(COUNT_FILE, JSON.stringify({ total: totalVisitors }));
+  } catch (e) {
+    console.error("Error saving visitor count:", e);
+  }
+}
+var activeSessions = /* @__PURE__ */ new Map();
+function cleanActiveSessions() {
+  const now = Date.now();
+  for (const [ip, time] of activeSessions.entries()) {
+    if (now - time > 5 * 60 * 1e3) {
+      activeSessions.delete(ip);
+    }
+  }
+}
 async function startServer() {
   const app = (0, import_express.default)();
+  app.set("trust proxy", true);
   const PORT = 3e3;
   let cachedMotivation = "";
   let cachedImagePrompt = "";
   let lastFetchDate = "";
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+  app.get("/api/visitor-count", (req, res) => {
+    const rawIp = req.ip || req.headers["x-forwarded-for"] || "unknown";
+    const ipStr = Array.isArray(rawIp) ? rawIp[0] : rawIp;
+    const now = Date.now();
+    if (!activeSessions.has(ipStr)) {
+      incrementTotalVisitors();
+    }
+    activeSessions.set(ipStr, now);
+    cleanActiveSessions();
+    res.json({
+      total: totalVisitors,
+      active: Math.max(1, activeSessions.size)
+    });
+  });
+  app.get("/api/news", async (req, res) => {
+    try {
+      const url = "https://news.google.com/rss/search?q=pendidikan+indonesia+kemendikbud+OR+kemendikdasmen+OR+kemdiktisaintek&hl=id&gl=ID&ceid=ID:id";
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch RSS: ${response.statusText}`);
+      }
+      const xml = await response.text();
+      const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+      let match;
+      const items = [];
+      while ((match = itemRegex.exec(xml)) !== null && items.length < 15) {
+        const itemContent = match[1];
+        const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
+        const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
+        const pubDateMatch = itemContent.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
+        const sourceMatch = itemContent.match(/<source[^>]*>([\s\S]*?)<\/source>/);
+        const rawTitle = titleMatch ? titleMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/, "$1").trim() : "";
+        const link = linkMatch ? linkMatch[1].trim() : "";
+        const pubDate = pubDateMatch ? pubDateMatch[1].trim() : "";
+        const source = sourceMatch ? sourceMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/, "$1").trim() : "";
+        let title = rawTitle;
+        if (source && title.endsWith(` - ${source}`)) {
+          title = title.substring(0, title.length - ` - ${source}`.length);
+        }
+        items.push({
+          title,
+          link,
+          pubDate,
+          source
+        });
+      }
+      res.json({ articles: items });
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      res.status(500).json({ error: "Failed to fetch education news" });
+    }
   });
   app.get("/api/motivation", async (req, res) => {
     try {
