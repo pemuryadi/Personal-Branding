@@ -29,12 +29,21 @@ export function Portfolio() {
             className="border border-border p-[25px] aspect-[4/3] md:aspect-auto md:min-h-[250px] flex flex-col justify-between bg-gradient-to-br from-card-from to-card-to hover:border-border-hover transition-colors duration-300 block cursor-pointer group"
           >
             <div>
-              <span className="text-[18px] font-mono text-muted block mb-6 transition-colors duration-300">[01]</span>
-              <Code2 className="w-8 h-8 text-ink mb-6 transition-colors duration-300 group-hover:text-pink-500" />
-              <h3 className="text-[20px] font-[800] uppercase tracking-[1px] text-ink mb-4 transition-colors duration-300 group-hover:underline">Web & Code Development</h3>
+              <div className="flex items-center justify-between mb-6">
+                <img 
+                  src="/images/logo umkm.png" 
+                  alt="Logo UMKM Naik Kelas" 
+                  className="h-10 w-auto object-contain" 
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                <span className="text-[18px] font-mono text-muted">[01]</span>
+              </div>
+              <h3 className="text-[20px] font-[800] uppercase tracking-[1px] text-blue-600 dark:text-blue-400 mb-4 transition-colors duration-300 group-hover:underline">UMKM Naik Kelas</h3>
             </div>
             <p className="text-[18px] leading-[1.6] text-muted m-0 transition-colors duration-300 mt-4 md:mt-8">
-              Integrasi Layanan Cloudflare, pengembangan dengan framework Vercel, Laravel, serta perancangan Sistem Informasi Manajemen sekolah yang terintegrasi dengan sistem otomatisasi data untuk menyederhanakan pelaporan, menghemat waktu guru, dan mempermudah pengambilan keputusan.
+              Langkah awal menuju transformasi bisnis Anda dimulai dari sini. Pilih menu di bawah ini sesuai dengan kebutuhan Anda saat ini—baik untuk mendalami teori melalui modul interaktif maupun langsung mensimulasikan perhitungan keuangan dengan alat bisnis praktis yang telah kami sediakan.
             </p>
           </motion.a>
 

@@ -2,6 +2,54 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Sparkles, RefreshCw } from 'lucide-react';
 
+const fallbackMotivations = [
+  {
+    text: "Seorang guru memengaruhi keabadian; ia tidak pernah tahu di mana pengaruhnya berhenti.",
+    imagePrompt: "an ancient library with glowing books, warm light, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Teknologi hanyalah alat. Namun untuk menyalakan rasa ingin tahu siswa, gurulah yang paling utama.",
+    imagePrompt: "student looking at a glowing holographic galaxy in a classroom, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Mengajar bukanlah tentang mengisi wadah yang kosong, melainkan tentang menyalakan api rasa ingin tahu.",
+    imagePrompt: "a small hand lighting a giant bonfire under the starry sky, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Pendidikan adalah senjata paling ampuh yang bisa Anda gunakan untuk mengubah dunia.",
+    imagePrompt: "a silhouette of a teacher looking at a futuristic city, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Guru terbaik mengajar dari hati, bukan sekadar dari buku.",
+    imagePrompt: "a glowing heart shaping into a book, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Tugas mendidik bukan hanya mencerdaskan otak, melainkan juga menanamkan akhlak mulia di dalam jiwa.",
+    imagePrompt: "a seedling growing from an open book under beautiful light, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Jadilah pelita yang menerangi jalan bagi mereka yang sedang mencari arah dalam kegelapan.",
+    imagePrompt: "a lighthouse shining light across a calm dark sea, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Setiap anak adalah bintang yang berhak bersinar. Guru adalah langit yang menopang sinar mereka.",
+    imagePrompt: "constellations in the night sky shaped like children and stars, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Pendidikan yang baik adalah fondasi untuk masa depan yang lebih cerah.",
+    imagePrompt: "abstract geometrical staircase leading up to the sun, minimalist illustration, flat design, vector art, blue and purple glow"
+  },
+  {
+    text: "Kesabaran seorang guru adalah jembatan emas bagi masa depan siswanya.",
+    imagePrompt: "a golden bridge spanning across a deep canyon, minimalist illustration, flat design, vector art, blue and purple glow"
+  }
+];
+
+const getFallbackMotivation = () => {
+  const day = new Date().getDate(); // 1-31
+  return fallbackMotivations[day % fallbackMotivations.length];
+};
+
 export function Motivation() {
   const [motivation, setMotivation] = useState<string>('');
   const [imagePrompt, setImagePrompt] = useState<string>('');
@@ -15,11 +63,13 @@ export function Motivation() {
       const response = await fetch('/api/motivation');
       if (!response.ok) throw new Error('Network response was not ok');
       const data = await response.json();
-      setMotivation(data.text);
-      setImagePrompt(data.imagePrompt || '');
+      setMotivation(data.text || 'Guru adalah pelita harapan bangsa.');
+      setImagePrompt(data.imagePrompt || 'inspiring minimalist teacher poster vector art blue purple');
     } catch (err) {
-      console.error(err);
-      setError(true);
+      console.warn('API failed, using local fallback motivation:', err);
+      const fallback = getFallbackMotivation();
+      setMotivation(fallback.text);
+      setImagePrompt(fallback.imagePrompt);
     } finally {
       setLoading(false);
     }
@@ -28,10 +78,6 @@ export function Motivation() {
   useEffect(() => {
     fetchMotivation();
   }, []);
-
-  if (error) {
-    return null; // Silent fail if API doesn't work
-  }
 
   return (
     <section className="px-6 lg:px-8 bg-bg transition-colors duration-300">
