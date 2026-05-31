@@ -15,6 +15,7 @@ export function Navbar() {
 
   const links = [
     { name: "Home", href: "#home" },
+    { name: "Artikel", href: "#artikel" },
     { name: "Ekosistem", href: "#ekosistem" },
     { name: "Portofolio", href: "#portofolio" },
     { name: "Kontak", href: "#contact" },
