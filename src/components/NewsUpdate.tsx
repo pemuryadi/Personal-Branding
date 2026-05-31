@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Newspaper, ArrowUpRight, RefreshCw, AlertCircle } from 'lucide-react';
 
 interface Article {

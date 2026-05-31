@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Sparkles, RefreshCw, Users, Activity } from 'lucide-react';
 
 const fallbackMotivations = [

@@ -1,5 +1,5 @@
 import { Code2, Sparkles } from "lucide-react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 export function Portfolio() {
   return (

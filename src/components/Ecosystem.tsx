@@ -1,5 +1,5 @@
 import { BookOpen, FileSpreadsheet, ShieldCheck, Box } from "lucide-react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 const ecosystemItems = [
   {
