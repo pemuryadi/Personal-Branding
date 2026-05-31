@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import * as dotenv from "dotenv";
@@ -8,8 +9,43 @@ dotenv.config();
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
+const COUNT_FILE = path.join(process.cwd(), ".visitor_count.json");
+let totalVisitors = 142; // Seed value
+try {
+  if (fs.existsSync(COUNT_FILE)) {
+    totalVisitors = JSON.parse(fs.readFileSync(COUNT_FILE, "utf-8")).total || 142;
+  } else {
+    fs.writeFileSync(COUNT_FILE, JSON.stringify({ total: totalVisitors }));
+  }
+} catch (e) {
+  console.error("Error loading visitor count:", e);
+}
+
+function incrementTotalVisitors() {
+  totalVisitors++;
+  try {
+    fs.writeFileSync(COUNT_FILE, JSON.stringify({ total: totalVisitors }));
+  } catch (e) {
+    console.error("Error saving visitor count:", e);
+  }
+}
+
+// In-memory active sessions tracker (IP -> timestamp)
+const activeSessions = new Map<string, number>();
+
+function cleanActiveSessions() {
+  const now = Date.now();
+  for (const [ip, time] of activeSessions.entries()) {
+    if (now - time > 5 * 60 * 1000) { // 5 minutes activity window
+      activeSessions.delete(ip);
+    }
+  }
+}
+
 async function startServer() {
   const app = express();
+  // Enable trust proxy so we get real IPs if deployed behind reverse proxy
+  app.set("trust proxy", true);
   const PORT = 3000;
 
   // Cache the motivation for the day
@@ -20,6 +56,68 @@ async function startServer() {
   // API routes FIRST
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  app.get("/api/visitor-count", (req, res) => {
+    const rawIp = req.ip || req.headers["x-forwarded-for"] || "unknown";
+    const ipStr = Array.isArray(rawIp) ? rawIp[0] : rawIp;
+
+    const now = Date.now();
+    if (!activeSessions.has(ipStr)) {
+      incrementTotalVisitors();
+    }
+    activeSessions.set(ipStr, now);
+    cleanActiveSessions();
+
+    res.json({
+      total: totalVisitors,
+      active: Math.max(1, activeSessions.size)
+    });
+  });
+
+  app.get("/api/news", async (req, res) => {
+    try {
+      const url = "https://news.google.com/rss/search?q=pendidikan+indonesia+kemendikbud+OR+kemendikdasmen+OR+kemdiktisaintek&hl=id&gl=ID&ceid=ID:id";
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch RSS: ${response.statusText}`);
+      }
+      const xml = await response.text();
+      
+      const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+      let match;
+      const items = [];
+      
+      while ((match = itemRegex.exec(xml)) !== null && items.length < 15) {
+        const itemContent = match[1];
+        const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
+        const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
+        const pubDateMatch = itemContent.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
+        const sourceMatch = itemContent.match(/<source[^>]*>([\s\S]*?)<\/source>/);
+        
+        const rawTitle = titleMatch ? titleMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/, '$1').trim() : '';
+        const link = linkMatch ? linkMatch[1].trim() : '';
+        const pubDate = pubDateMatch ? pubDateMatch[1].trim() : '';
+        const source = sourceMatch ? sourceMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/, '$1').trim() : '';
+        
+        let title = rawTitle;
+        if (source && title.endsWith(` - ${source}`)) {
+          title = title.substring(0, title.length - ` - ${source}`.length);
+        }
+        
+        items.push({
+          title,
+          link,
+          pubDate,
+          source
+        });
+      }
+      
+      res.json({ articles: items });
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      res.status(500).json({ error: "Failed to fetch education news" });
+    }
   });
 
   app.get("/api/motivation", async (req, res) => {
