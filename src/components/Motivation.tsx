@@ -53,21 +53,37 @@ const getFallbackMotivation = () => {
 export function Motivation() {
   const [motivation, setMotivation] = useState<string>('');
   const [imagePrompt, setImagePrompt] = useState<string>('');
+  const [imageModel, setImageModel] = useState<string>('nano');
   const [loading, setLoading] = useState(true);
   const [visitorData, setVisitorData] = useState({ total: 142, active: 5 });
   const [fluctuatedActive, setFluctuatedActive] = useState(5);
 
-  const fetchMotivation = () => {
+  const fetchMotivation = async (forceRefresh = false) => {
     setLoading(true);
-    // Use local fallback for static GitHub Pages deployment
-    const fallback = getFallbackMotivation();
-    
-    // Simulate slight network delay for smooth animation
-    setTimeout(() => {
+    // Randomize image model
+    const models = ['nanobanana-2', 'openai'];
+    setImageModel(models[Math.floor(Math.random() * models.length)]);
+
+    try {
+      const url = forceRefresh ? '/api/motivation?refresh=true' : '/api/motivation';
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('API Error');
+      const data = await res.json();
+      
+      if (data.text) {
+        setMotivation(data.text);
+        setImagePrompt(data.imagePrompt);
+      } else {
+        throw new Error('No text returned');
+      }
+    } catch (err) {
+      console.error('API failed, using fallback:', err);
+      const fallback = getFallbackMotivation();
       setMotivation(fallback.text);
       setImagePrompt(fallback.imagePrompt);
+    } finally {
       setLoading(false);
-    }, 600);
+    }
   };
 
   const fetchVisitorCount = async () => {
@@ -130,7 +146,7 @@ export function Motivation() {
                   <div className="w-full h-full animate-pulse bg-border/40" />
                 ) : (
                   <img
-                    src={`https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt || 'inspiring teacher in a futuristic glowing classroom, vector minimalist illustration')}%20beautiful%20inspiring%20teacher%20poster%20minimalist%20vector%20art%20style%20blue%20and%20purple%20glow?width=300&height=375&nologo=true&private=true&seed=${encodeURIComponent(motivation.substring(0, 15))}`}
+                    src={`https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt || 'inspiring teacher in a futuristic glowing classroom, vector minimalist illustration')}%20beautiful%20inspiring%20teacher%20poster%20minimalist%20vector%20art%20style%20blue%20and%20purple%20glow?width=300&height=375&model=${imageModel}&nologo=true&private=true&seed=${encodeURIComponent(motivation.substring(0, 15))}`}
                     alt="Poster Motivasi"
                     className="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-all duration-700 ease-in-out"
                     loading="lazy"
@@ -145,6 +161,14 @@ export function Motivation() {
                     <span className="text-[11px] font-bold tracking-[0.1em] uppercase text-blue-500 flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5" /> MOTIVASI GURU HARI INI
                     </span>
+                    <button 
+                      onClick={() => fetchMotivation(true)}
+                      disabled={loading}
+                      className="p-1.5 text-muted hover:text-ink transition-colors disabled:opacity-50"
+                      title="Refresh Motivasi"
+                    >
+                      <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+                    </button>
                   </div>
                   
                   <div className="flex items-center min-h-[60px]">

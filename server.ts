@@ -74,10 +74,14 @@ async function startServer() {
   app.get("/api/motivation", async (req, res) => {
     try {
       const today = new Date().toISOString().split("T")[0];
+      const forceRefresh = req.query.refresh === 'true';
       
-      if (cachedMotivation && cachedImagePrompt && lastFetchDate === today) {
+      if (!forceRefresh && cachedMotivation && cachedImagePrompt && lastFetchDate === today) {
         return res.json({ text: cachedMotivation, imagePrompt: cachedImagePrompt });
       }
+
+      const textModels = ["gemini", "deepseek"];
+      const selectedTextModel = textModels[Math.floor(Math.random() * textModels.length)];
 
       const aiResponse = await fetch("https://text.pollinations.ai/openai", {
         method: "POST",
@@ -86,7 +90,7 @@ async function startServer() {
           "Authorization": "Bearer sk_B6XU4IbbNGAPU1zcOd69DvKHYihLYpa9"
         },
         body: JSON.stringify({
-          model: "openai",
+          model: selectedTextModel,
           response_format: { type: "json_object" },
           messages: [
             {
@@ -109,7 +113,7 @@ async function startServer() {
         cachedMotivation = parsed.text || "Guru adalah pelita harapan bangsa.";
         cachedImagePrompt = parsed.imagePrompt || "inspiring minimalist teacher poster vector art blue purple";
         lastFetchDate = today;
-        return res.json({ text: cachedMotivation, imagePrompt: cachedImagePrompt });
+        return res.json({ text: cachedMotivation, imagePrompt: cachedImagePrompt, modelUsed: selectedTextModel });
       } else {
         return res.status(500).json({ error: "No text generated" });
       }
