@@ -2,12 +2,6 @@ import express from "express";
 import path from "path";
 import fs from "fs";
 import { createServer as createViteServer } from "vite";
-import { GoogleGenAI } from "@google/genai";
-import * as dotenv from "dotenv";
-
-dotenv.config();
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
 const COUNT_FILE = path.join(process.cwd(), ".visitor_count.json");
 let totalVisitors = 142; // Seed value
@@ -128,15 +122,30 @@ async function startServer() {
         return res.json({ text: cachedMotivation, imagePrompt: cachedImagePrompt });
       }
 
-      const response = await ai.models.generateContent({
-        model: "gemini-2.5-flash",
-        contents: "Tuliskan satu paragraf kutipan motivasi mendalam untuk guru di seluruh dunia (berbahasa Indonesia). Berikan juga prompt bahasa Inggris singkat (1 kalimat) untuk meng-generate poster ilustrasi motivasi guru yang indah dengan gaya seni vektor/minimalis menggunakan warna biru dan ungu (blue and purple). Format response Anda harus berupa JSON valid dengan skema: { \"text\": \"motivasi\", \"imagePrompt\": \"prompt ilustrasi\" }",
-        config: {
-          responseMimeType: "application/json"
-        }
+      const aiResponse = await fetch("https://text.pollinations.ai/openai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer sk_B6XU4IbbNGAPU1zcOd69DvKHYihLYpa9"
+        },
+        body: JSON.stringify({
+          model: "openai",
+          response_format: { type: "json_object" },
+          messages: [
+            {
+              role: "user",
+              content: "Tuliskan satu paragraf kutipan motivasi mendalam untuk guru di seluruh dunia (berbahasa Indonesia). Berikan juga prompt bahasa Inggris singkat (1 kalimat) untuk meng-generate poster ilustrasi motivasi guru yang indah dengan gaya seni vektor/minimalis menggunakan warna biru dan ungu (blue and purple). Format response Anda harus berupa JSON valid dengan skema: { \"text\": \"motivasi\", \"imagePrompt\": \"prompt ilustrasi\" }"
+            }
+          ]
+        })
       });
 
-      const text = response.text;
+      if (!aiResponse.ok) {
+        throw new Error(`Pollination API error: ${aiResponse.status}`);
+      }
+      
+      const data = await aiResponse.json();
+      const text = data.choices?.[0]?.message?.content;
       
       if (text) {
         const parsed = JSON.parse(text);

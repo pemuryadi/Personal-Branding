@@ -37,12 +37,12 @@
 .dark {
   --app-bg: #0a0a0a;
   --app-ink: #ffffff;
-  --app-muted: #555555;
-  --app-border: #222222;
+  --app-muted: #aaaaaa;
+  --app-border: #333333;
   
-  --app-card-from: #111111;
-  --app-card-to: #0a0a0a;
-  --app-border-hover: #444444;
+  --app-card-from: rgba(17, 17, 17, 0.7);
+  --app-card-to: rgba(10, 10, 10, 0.7);
+  --app-border-hover: #555555;
   
   --app-btn-bg: #ffffff;
   --app-btn-text: #0a0a0a;
@@ -51,15 +51,21 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--app-bg);
+  background: var(--app-bg);
   color: var(--app-ink);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--app-bg);
+  background: linear-gradient(135deg, #f5e6d3 0%, #b2fafa 50%, #ff7e67 100%);
+  background-attachment: fixed;
   color: var(--app-ink);
+}
+
+html.dark body {
+  background: linear-gradient(135deg, #4a3b2c 0%, #1a4a4a 50%, #8a2b1c 100%);
+  background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
