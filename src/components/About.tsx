@@ -16,7 +16,7 @@ export function About() {
             style={{ boxShadow: '12px 12px 0px var(--app-ink)' }}
           >
              <img 
-               src="/images/pemuryadi.jpg" 
+               src="/images/pemuryadi 1.png" 
                alt="Praswara Eko Maryadi" 
                className="w-full h-auto aspect-[3/4] object-cover grayscale hover:grayscale-0 transition-all duration-500" 
                onError={(e) => {

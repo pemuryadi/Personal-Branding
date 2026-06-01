@@ -3,39 +3,6 @@ import path from "path";
 import fs from "fs";
 import { createServer as createViteServer } from "vite";
 
-const COUNT_FILE = path.join(process.cwd(), ".visitor_count.json");
-let totalVisitors = 142; // Seed value
-try {
-  if (fs.existsSync(COUNT_FILE)) {
-    totalVisitors = JSON.parse(fs.readFileSync(COUNT_FILE, "utf-8")).total || 142;
-  } else {
-    fs.writeFileSync(COUNT_FILE, JSON.stringify({ total: totalVisitors }));
-  }
-} catch (e) {
-  console.error("Error loading visitor count:", e);
-}
-
-function incrementTotalVisitors() {
-  totalVisitors++;
-  try {
-    fs.writeFileSync(COUNT_FILE, JSON.stringify({ total: totalVisitors }));
-  } catch (e) {
-    console.error("Error saving visitor count:", e);
-  }
-}
-
-// In-memory active sessions tracker (IP -> timestamp)
-const activeSessions = new Map<string, number>();
-
-function cleanActiveSessions() {
-  const now = Date.now();
-  for (const [ip, time] of activeSessions.entries()) {
-    if (now - time > 5 * 60 * 1000) { // 5 minutes activity window
-      activeSessions.delete(ip);
-    }
-  }
-}
-
 async function startServer() {
   const app = express();
   // Enable trust proxy so we get real IPs if deployed behind reverse proxy
@@ -50,23 +17,6 @@ async function startServer() {
   // API routes FIRST
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
-  });
-
-  app.get("/api/visitor-count", (req, res) => {
-    const rawIp = req.ip || req.headers["x-forwarded-for"] || "unknown";
-    const ipStr = Array.isArray(rawIp) ? rawIp[0] : rawIp;
-
-    const now = Date.now();
-    if (!activeSessions.has(ipStr)) {
-      incrementTotalVisitors();
-    }
-    activeSessions.set(ipStr, now);
-    cleanActiveSessions();
-
-    res.json({
-      total: totalVisitors,
-      active: Math.max(1, activeSessions.size)
-    });
   });
 
 
