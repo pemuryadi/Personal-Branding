@@ -4,7 +4,6 @@ import { Hero } from '@/src/components/Hero';
 import { Motivation } from '@/src/components/Motivation';
 import { About } from '@/src/components/About';
 import { Ecosystem } from '@/src/components/Ecosystem';
-import { NewsUpdate } from '@/src/components/NewsUpdate';
 import { Portfolio } from '@/src/components/Portfolio';
 import { Footer } from '@/src/components/Footer';
 
@@ -37,7 +36,6 @@ export default function App() {
         <Motivation />
         <About />
         <Ecosystem />
-        <NewsUpdate />
         <Portfolio />
       </main>
       <Footer />

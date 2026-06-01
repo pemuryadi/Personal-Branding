@@ -69,50 +69,7 @@ async function startServer() {
     });
   });
 
-  app.get("/api/news", async (req, res) => {
-    try {
-      const url = "https://news.google.com/rss/search?q=pendidikan+indonesia+kemendikbud+OR+kemendikdasmen+OR+kemdiktisaintek&hl=id&gl=ID&ceid=ID:id";
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch RSS: ${response.statusText}`);
-      }
-      const xml = await response.text();
-      
-      const itemRegex = /<item>([\s\S]*?)<\/item>/g;
-      let match;
-      const items = [];
-      
-      while ((match = itemRegex.exec(xml)) !== null && items.length < 15) {
-        const itemContent = match[1];
-        const titleMatch = itemContent.match(/<title>([\s\S]*?)<\/title>/);
-        const linkMatch = itemContent.match(/<link>([\s\S]*?)<\/link>/);
-        const pubDateMatch = itemContent.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
-        const sourceMatch = itemContent.match(/<source[^>]*>([\s\S]*?)<\/source>/);
-        
-        const rawTitle = titleMatch ? titleMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/, '$1').trim() : '';
-        const link = linkMatch ? linkMatch[1].trim() : '';
-        const pubDate = pubDateMatch ? pubDateMatch[1].trim() : '';
-        const source = sourceMatch ? sourceMatch[1].replace(/<!\[CDATA\[(.*?)\]\]>/, '$1').trim() : '';
-        
-        let title = rawTitle;
-        if (source && title.endsWith(` - ${source}`)) {
-          title = title.substring(0, title.length - ` - ${source}`.length);
-        }
-        
-        items.push({
-          title,
-          link,
-          pubDate,
-          source
-        });
-      }
-      
-      res.json({ articles: items });
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      res.status(500).json({ error: "Failed to fetch education news" });
-    }
-  });
+
 
   app.get("/api/motivation", async (req, res) => {
     try {
