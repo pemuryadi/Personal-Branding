@@ -53,14 +53,10 @@ const getFallbackMotivation = () => {
 export function Motivation() {
   const [motivation, setMotivation] = useState<string>('');
   const [imagePrompt, setImagePrompt] = useState<string>('');
-  const [imageModel, setImageModel] = useState<string>('nanobanana-2');
   const [loading, setLoading] = useState(true);
 
   const fetchMotivation = async (forceRefresh = false) => {
     setLoading(true);
-    // Randomize image model
-    const models = ['nanobanana-2', 'openai'];
-    setImageModel(models[Math.floor(Math.random() * models.length)]);
 
     try {
       const url = forceRefresh ? '/api/motivation?refresh=true' : '/api/motivation';
@@ -105,7 +101,7 @@ export function Motivation() {
                   <div className="w-full h-full animate-pulse bg-border/40" />
                 ) : (
                   <img
-                    src={`https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt || 'inspiring teacher in a futuristic glowing classroom, vector minimalist illustration')}%20beautiful%20inspiring%20teacher%20poster%20minimalist%20vector%20art%20style%20blue%20and%20purple%20glow?width=300&height=375&model=${imageModel}&nologo=true&private=true&seed=${encodeURIComponent(motivation.substring(0, 15))}`}
+                    src={`https://pollinations.ai/p/${encodeURIComponent((imagePrompt || 'inspiring teacher in a futuristic glowing classroom') + ' minimalist vector art style')}?width=300&height=375&nologo=true`}
                     alt="Poster Motivasi"
                     className="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-all duration-700 ease-in-out"
                     loading="lazy"
@@ -116,7 +112,7 @@ export function Motivation() {
               {/* Right side: Motivation Text */}
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-bold tracking-[0.1em] uppercase text-blue-500 flex items-center gap-1.5">
+                  <span className="text-[11px] font-bold tracking-[0.1em] uppercase text-[var(--color-btn-bg)] flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5" /> MOTIVASI GURU HARI INI
                   </span>
                   <button 

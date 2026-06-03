@@ -20,33 +20,33 @@
 }
 
 :root {
-  --app-bg: #ffffff;
-  --app-ink: #0a0a0a;
-  --app-muted: #666666;
-  --app-border: #e5e5e5;
+  --app-bg: #F4F5F7;
+  --app-ink: #171026;
+  --app-muted: #7A8999;
+  --app-border: #d1d5db;
   
-  --app-card-from: #f8f8f8;
-  --app-card-to: #ffffff;
-  --app-border-hover: #cccccc;
+  --app-card-from: #ffffff;
+  --app-card-to: #F4F5F7;
+  --app-border-hover: #7B00FF;
   
-  --app-btn-bg: #0a0a0a;
+  --app-btn-bg: #7B00FF;
   --app-btn-text: #ffffff;
-  --app-btn-hover: #333333;
+  --app-btn-hover: #3E00B3;
 }
 
 .dark {
-  --app-bg: #0a0a0a;
-  --app-ink: #ffffff;
-  --app-muted: #aaaaaa;
-  --app-border: #333333;
+  --app-bg: #171026;
+  --app-ink: #F4F5F7;
+  --app-muted: #7A8999;
+  --app-border: #2D273B;
   
-  --app-card-from: rgba(17, 17, 17, 0.7);
-  --app-card-to: rgba(10, 10, 10, 0.7);
-  --app-border-hover: #555555;
+  --app-card-from: rgba(62, 0, 179, 0.1);
+  --app-card-to: rgba(23, 16, 38, 0.7);
+  --app-border-hover: #7B00FF;
   
-  --app-btn-bg: #ffffff;
-  --app-btn-text: #0a0a0a;
-  --app-btn-hover: #a0a0a0;
+  --app-btn-bg: #7B00FF;
+  --app-btn-text: #ffffff;
+  --app-btn-hover: #9E47FF;
 }
 
 html {
@@ -58,13 +58,13 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: linear-gradient(135deg, #f5e6d3 0%, #b2fafa 50%, #ff7e67 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #F4F5F7 100%);
   background-attachment: fixed;
   color: var(--app-ink);
 }
 
 html.dark body {
-  background: linear-gradient(135deg, #4a3b2c 0%, #1a4a4a 50%, #8a2b1c 100%);
+  background: linear-gradient(135deg, #171026 0%, #2A1E45 100%);
   background-attachment: fixed;
 }
 
