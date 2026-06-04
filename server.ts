@@ -29,7 +29,7 @@ async function startServer() {
       if (!prompt) return res.status(400).json({ error: "No prompt provided" });
       
       const apiKey = process.env.POLLINATIONS_API_KEY;
-      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true&model=flux${apiKey ? `&key=${apiKey}` : ""}`;
+      const url = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true&model=flux${apiKey ? `&key=${apiKey}` : ""}`;
       
       const aiResponse = await fetch(url);
       if (!aiResponse.ok) {
@@ -58,7 +58,7 @@ async function startServer() {
       const textModels = ["gemini", "deepseek"];
       const selectedTextModel = textModels[Math.floor(Math.random() * textModels.length)];
 
-      const aiResponse = await fetch("https://text.pollinations.ai/openai", {
+      const aiResponse = await fetch("https://gen.pollinations.ai/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
