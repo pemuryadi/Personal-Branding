@@ -73,20 +73,74 @@ async function startServer() {
     }
   });
 
-  // Vite middleware for development
+  let vite: any;
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
+    vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "custom", // Change to custom to allow our own route handling
     });
     app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
   }
+
+  // Programmatic SEO route for schools
+  app.get("/sekolah/:kota/:namaSekolah", async (req, res, next) => {
+    try {
+      const { kota, namaSekolah } = req.params;
+      
+      const formatString = (str: string) => str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      
+      const formattedKota = formatString(kota);
+      const formattedSekolah = formatString(namaSekolah);
+      
+      const pageTitle = `${formattedSekolah} - ${formattedKota} | Pemuryadi Digital Hub`;
+      const pageDesc = `Informasi lengkap mengenai ${formattedSekolah} di kota ${formattedKota}. Terdaftar di database sekolah Indonesia.`;
+
+      const indexPath = process.env.NODE_ENV === "production" 
+        ? path.join(process.cwd(), "dist", "index.html")
+        : path.join(process.cwd(), "index.html");
+
+      let html = await fs.promises.readFile(indexPath, "utf-8");
+
+      html = html.replace(/<title>.*<\/title>/, `<title>${pageTitle}</title>`);
+      html = html.replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${pageDesc}" />`);
+      html = html.replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${pageTitle}" />`);
+      html = html.replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${pageDesc}" />`);
+
+      if (vite) {
+        html = await vite.transformIndexHtml(req.originalUrl, html);
+      }
+      
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  if (process.env.NODE_ENV === "production") {
+    const distPath = path.join(process.cwd(), 'dist');
+    app.use(express.static(distPath, { index: false })); // index: false so it doesn't override our catch-all
+  }
+
+  // Catch-all route to serve the SPA
+  app.use('*', async (req, res, next) => {
+    try {
+      if (req.originalUrl.startsWith('/api')) return next();
+      
+      const indexPath = process.env.NODE_ENV === "production" 
+        ? path.join(process.cwd(), "dist", "index.html")
+        : path.join(process.cwd(), "index.html");
+
+      let html = await fs.promises.readFile(indexPath, "utf-8");
+
+      if (vite) {
+        html = await vite.transformIndexHtml(req.originalUrl, html);
+      }
+      
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+    } catch (error) {
+      next(error);
+    }
+  });
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${PORT}`);
