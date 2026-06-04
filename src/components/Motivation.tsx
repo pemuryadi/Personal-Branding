@@ -105,6 +105,11 @@ export function Motivation() {
                     alt="Poster Motivasi"
                     className="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-all duration-700 ease-in-out"
                     loading="lazy"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null; // prevents looping
+                      target.src = 'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=300&h=375&fit=crop';
+                    }}
                   />
                 )}
               </div>
