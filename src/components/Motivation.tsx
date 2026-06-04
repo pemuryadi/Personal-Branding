@@ -101,7 +101,7 @@ export function Motivation() {
                   <div className="w-full h-full animate-pulse bg-border/40" />
                 ) : (
                   <img
-                    src={`https://pollinations.ai/p/${encodeURIComponent((imagePrompt || 'inspiring teacher in a futuristic glowing classroom') + ' minimalist vector art style')}?width=300&height=375&nologo=true`}
+                    src={`/api/poster?prompt=${encodeURIComponent((imagePrompt || 'inspiring teacher in a futuristic glowing classroom') + ' minimalist vector art style')}`}
                     alt="Poster Motivasi"
                     className="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-all duration-700 ease-in-out"
                     loading="lazy"

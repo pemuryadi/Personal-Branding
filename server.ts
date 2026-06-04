@@ -1,7 +1,11 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
+
+dotenv.config({ path: ".env.local" });
+dotenv.config();
 
 async function startServer() {
   const app = express();
@@ -19,7 +23,28 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
-
+  app.get("/api/poster", async (req, res) => {
+    try {
+      const prompt = req.query.prompt as string;
+      if (!prompt) return res.status(400).json({ error: "No prompt provided" });
+      
+      const apiKey = process.env.POLLINATIONS_API_KEY;
+      const url = `https://pollinations.ai/p/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true${apiKey ? `&key=${apiKey}` : ""}`;
+      
+      const aiResponse = await fetch(url);
+      if (!aiResponse.ok) {
+        throw new Error(`Pollination API error: ${aiResponse.status}`);
+      }
+      
+      const buffer = await aiResponse.arrayBuffer();
+      res.set("Content-Type", "image/jpeg");
+      res.set("Cache-Control", "public, max-age=86400");
+      res.send(Buffer.from(buffer));
+    } catch (error) {
+      console.error("Error generating poster:", error);
+      res.status(500).json({ error: "Failed to generate poster" });
+    }
+  });
 
   app.get("/api/motivation", async (req, res) => {
     try {
@@ -37,7 +62,7 @@ async function startServer() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer sk_B6XU4IbbNGAPU1zcOd69DvKHYihLYpa9"
+          "Authorization": `Bearer ${process.env.POLLINATIONS_API_KEY || ''}`
         },
         body: JSON.stringify({
           model: selectedTextModel,
