@@ -7,8 +7,7 @@ const ecosystemItems = [
     title: "Generator KBM",
     description: "Pembuatan perangkat Kegiatan Belajar Mengajar secara otomatis dan terstruktur.",
     stack: "WEBSITE & ai",
-    comingSoon: true,
-    url: "https://razkadigital.my.canva.site/apk-gen-pemuryadi-v2",
+    url: "https://www.genid.id",
     hasTrial: true
   },
   {
