@@ -7,7 +7,7 @@ const ecosystemItems = [
     title: "Generator KBM",
     description: "Pembuatan perangkat Kegiatan Belajar Mengajar secara otomatis dan terstruktur.",
     stack: "WEBSITE & ai",
-    url: "https://www.genid.id",
+    url: "https://www.digen.id",
     hasTrial: true
   },
   {
