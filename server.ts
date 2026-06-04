@@ -29,7 +29,7 @@ async function startServer() {
       if (!prompt) return res.status(400).json({ error: "No prompt provided" });
       
       const apiKey = process.env.POLLINATIONS_API_KEY;
-      const url = `https://pollinations.ai/p/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true${apiKey ? `&key=${apiKey}` : ""}`;
+      const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true&model=flux${apiKey ? `&key=${apiKey}` : ""}`;
       
       const aiResponse = await fetch(url);
       if (!aiResponse.ok) {
