@@ -2,12 +2,20 @@ import { useEffect, useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Users, FileText, Download, Award } from "lucide-react";
 
-const stats = [
-  { id: 1, label: "Guru & Sekolah Terbantu", value: 1500, suffix: "+", icon: Users },
-  { id: 2, label: "Modul & Perangkat Dibuat", value: 50, suffix: "+", icon: FileText },
-  { id: 3, label: "Total Unduhan", value: 5000, suffix: "+", icon: Download },
-  { id: 4, label: "Penghargaan Inovasi", value: 5, suffix: "", icon: Award },
-];
+const iconMap: Record<string, any> = {
+  Users,
+  FileText,
+  Download,
+  Award
+};
+
+type StatItem = {
+  id: number;
+  label: string;
+  value: number;
+  suffix: string;
+  icon: string;
+};
 
 function Counter({ from, to, duration = 2 }: { from: number; to: number; duration?: number }) {
   const [count, setCount] = useState(from);
@@ -36,6 +44,15 @@ function Counter({ from, to, duration = 2 }: { from: number; to: number; duratio
 }
 
 export function ImpactStats() {
+  const [stats, setStats] = useState<StatItem[]>([]);
+
+  useEffect(() => {
+    fetch('/data/stats.json')
+      .then(res => res.json())
+      .then(data => setStats(data))
+      .catch(err => console.error("Failed to load stats", err));
+  }, []);
+
   return (
     <section id="impact" className="py-[60px] px-6 lg:px-8 transition-colors duration-300 bg-bg">
       <div className="max-w-6xl mx-auto">
@@ -49,7 +66,9 @@ export function ImpactStats() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {stats.map((stat, index) => (
+          {stats.map((stat, index) => {
+            const IconComponent = iconMap[stat.icon] || Award;
+            return (
             <motion.div
               key={stat.id}
               initial={{ opacity: 0, y: 20 }}
@@ -58,7 +77,7 @@ export function ImpactStats() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="border border-border p-6 rounded-2xl flex flex-col items-center justify-center text-center bg-gradient-to-b from-card-from to-card-to hover:border-border-hover transition-all duration-300 shadow-sm hover:shadow-md"
             >
-              <stat.icon className="w-10 h-10 text-btn-bg mb-4 opacity-80" />
+              <IconComponent className="w-10 h-10 text-btn-bg mb-4 opacity-80" />
               <div className="text-[32px] md:text-[40px] font-[900] text-ink mb-2 tracking-tight flex items-center">
                 <Counter from={0} to={stat.value} />
                 <span>{stat.suffix}</span>
@@ -67,7 +86,8 @@ export function ImpactStats() {
                 {stat.label}
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

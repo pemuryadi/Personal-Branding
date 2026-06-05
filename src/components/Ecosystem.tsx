@@ -24,8 +24,7 @@ const ecosystemItems: EcosystemItem[] = [
     title: "Raport Instan",
     description: "Otomatisasi pengolahan nilai dan pengisian raport berbasis Kurikulum Merdeka.",
     stack: "Sheets • Apps Script",
-    url: "https://raportsks.my.id/",
-    hasTrial: true
+    url: "https://raportsks.my.id/"
   },
   {
     icon: ShieldCheck,

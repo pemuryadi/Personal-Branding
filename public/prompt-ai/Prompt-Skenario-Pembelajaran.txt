@@ -1,0 +1,2 @@
+Contoh Prompt Skenario Pembelajaran:
+"Bertindaklah sebagai guru penggerak. Buatlah skenario pembelajaran berdiferensiasi untuk materi [Masukkan Materi] selama 2 JP (2x40 menit)."

@@ -4,27 +4,51 @@ import { Download, FileText, Database, Layers } from "lucide-react";
 const resources = [
   {
     id: 1,
-    title: "Template Modul Ajar (KM)",
-    description: "Format Modul Ajar Kurikulum Merdeka yang siap pakai dan mudah disesuaikan untuk semua mata pelajaran.",
+    title: "Modul Ajar Bahasa Indonesia",
+    description: "Contoh Modul Ajar Bahasa Indonesia kelas 7 Kurikulum Merdeka.",
     icon: FileText,
     type: "Document",
-    link: "#"
+    link: "/modul-ajar/Modul-Ajar-Bahasa-Indonesia.txt"
   },
   {
     id: 2,
-    title: "Database Prompt AI Edukasi",
-    description: "Kumpulan prompt ChatGPT/Claude terbaik untuk membantu guru menyusun skenario pembelajaran.",
-    icon: Database,
-    type: "Notion Template",
-    link: "#"
+    title: "Modul Ajar Matematika",
+    description: "Contoh Modul Ajar Matematika kelas 8 Kurikulum Merdeka.",
+    icon: FileText,
+    type: "Document",
+    link: "/modul-ajar/Modul-Ajar-Matematika.txt"
   },
   {
     id: 3,
-    title: "Sistem Manajemen Nilai",
-    description: "Spreadsheet terotomatisasi untuk mengolah nilai sumatif dan formatif secara instan.",
+    title: "Prompt Skenario Pembelajaran",
+    description: "Prompt untuk AI membuat skenario pembelajaran berdiferensiasi.",
+    icon: Database,
+    type: "Notion Template",
+    link: "/prompt-ai/Prompt-Skenario-Pembelajaran.txt"
+  },
+  {
+    id: 4,
+    title: "Prompt Generator Soal",
+    description: "Prompt untuk men-generate soal HOTS pilihan ganda.",
+    icon: Database,
+    type: "Notion Template",
+    link: "/prompt-ai/Prompt-Generator-Soal.txt"
+  },
+  {
+    id: 5,
+    title: "Template Nilai Formatif",
+    description: "Spreadsheet untuk merekap dan mengolah nilai formatif siswa.",
     icon: Layers,
     type: "Google Sheets",
-    link: "#"
+    link: "/manajemen-nilai/Template-Nilai-Formatif.csv"
+  },
+  {
+    id: 6,
+    title: "Template Nilai Sumatif",
+    description: "Spreadsheet untuk merekap dan mengolah nilai sumatif siswa.",
+    icon: Layers,
+    type: "Google Sheets",
+    link: "/manajemen-nilai/Template-Nilai-Sumatif.csv"
   }
 ];
 

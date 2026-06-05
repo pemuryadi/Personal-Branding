@@ -8,7 +8,6 @@ import { Footer } from '@/src/components/Footer';
 import { ImpactStats } from '@/src/components/ImpactStats';
 import { Testimonials } from '@/src/components/Testimonials';
 import { ResourceHub } from '@/src/components/ResourceHub';
-import { SpeakerBooking } from '@/src/components/SpeakerBooking';
 
 export default function App() {
   return (
@@ -23,7 +22,6 @@ export default function App() {
         <ResourceHub />
         <Portfolio />
         <Testimonials />
-        <SpeakerBooking />
       </main>
       <Footer />
     </div>

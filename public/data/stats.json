@@ -1,0 +1,6 @@
+[
+  { "id": 1, "label": "Guru & Sekolah Terbantu", "value": 1500, "suffix": "+", "icon": "Users" },
+  { "id": 2, "label": "Modul & Perangkat Dibuat", "value": 50, "suffix": "+", "icon": "FileText" },
+  { "id": 3, "label": "Total Unduhan", "value": 5000, "suffix": "+", "icon": "Download" },
+  { "id": 4, "label": "Penghargaan Inovasi", "value": 5, "suffix": "", "icon": "Award" }
+]
