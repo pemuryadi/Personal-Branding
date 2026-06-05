@@ -32,7 +32,7 @@ export function Testimonials() {
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <h2 className="text-[18px] tracking-[0.2em] uppercase text-muted mb-[15px] font-[700] m-0 transition-colors duration-300">
-              Kata Mereka
+              Kata Mereka <span className="text-[10px] text-btn-bg ml-2 tracking-normal lowercase">(dalam pengembangan)</span>
             </h2>
             <p className="text-[18px] leading-[1.6] text-ink font-bold max-w-2xl m-0 transition-colors duration-300">
               Testimoni dari rekan sejawat dan institusi yang telah merasakan manfaat langsung.

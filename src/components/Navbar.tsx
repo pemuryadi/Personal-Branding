@@ -4,6 +4,12 @@ import { useState, useEffect } from "react";
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     if (isDark) {
@@ -26,7 +32,14 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="flex items-end justify-between">
           <div className="flex-shrink-0 flex items-center">
-            {/* Brand text removed as requested */}
+            <div className="flex flex-col">
+              <span className="text-[14px] font-[800] tracking-wider text-ink transition-colors duration-300">
+                {time.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+              </span>
+              <span className="text-[12px] font-bold text-muted tracking-[0.2em] transition-colors duration-300">
+                {time.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} WIB
+              </span>
+            </div>
           </div>
           
           <div className="hidden md:flex items-center gap-10">
