@@ -17,6 +17,8 @@ export function Navbar() {
     { name: "Home", href: "#home" },
     { name: "Ekosistem", href: "#ekosistem" },
     { name: "Portofolio", href: "#portofolio" },
+    { name: "Unduhan", href: "#resources" },
+    { name: "Undang", href: "#undang" },
     { name: "Kontak", href: "mailto:p.e.muryadi@gmail.com" },
   ];
 

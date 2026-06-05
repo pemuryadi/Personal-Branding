@@ -54,19 +54,21 @@ export function Motivation() {
   const [motivation, setMotivation] = useState<string>('');
   const [imagePrompt, setImagePrompt] = useState<string>('');
   const [loading, setLoading] = useState(true);
+  const [refreshKey, setRefreshKey] = useState<number>(Date.now());
 
   const fetchMotivation = async (forceRefresh = false) => {
     setLoading(true);
 
     try {
-      const url = forceRefresh ? '/api/motivation?refresh=true' : '/api/motivation';
-      const res = await fetch(url);
+      const url = forceRefresh ? `/api/motivation?refresh=true&t=${Date.now()}` : `/api/motivation?t=${new Date().toISOString().split('T')[0]}`;
+      const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw new Error('API Error');
       const data = await res.json();
       
       if (data.text) {
         setMotivation(data.text);
         setImagePrompt(data.imagePrompt);
+        setRefreshKey(Date.now());
       } else {
         throw new Error('No text returned');
       }
@@ -82,6 +84,13 @@ export function Motivation() {
 
   useEffect(() => {
     fetchMotivation();
+
+    // Mengecek otomatis per jam untuk update ke motivasi hari berikutnya
+    const interval = setInterval(() => {
+      fetchMotivation();
+    }, 60 * 60 * 1000); // 1 jam
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -101,7 +110,7 @@ export function Motivation() {
                   <div className="w-full h-full animate-pulse bg-border/40" />
                 ) : (
                   <img
-                    src={`/api/poster?prompt=${encodeURIComponent((imagePrompt || 'inspiring teacher in a futuristic glowing classroom') + ' minimalist vector art style')}`}
+                    src={`/api/poster?prompt=${encodeURIComponent((imagePrompt || 'inspiring teacher in a futuristic glowing classroom') + ' minimalist vector art style')}&t=${refreshKey}`}
                     alt="Poster Motivasi"
                     className="w-full h-full object-cover filter brightness-95 hover:scale-105 transition-all duration-700 ease-in-out"
                     loading="lazy"

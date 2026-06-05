@@ -29,7 +29,9 @@ async function startServer() {
       if (!prompt) return res.status(400).json({ error: "No prompt provided" });
       
       const apiKey = process.env.POLLINATIONS_API_KEY;
-      const url = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true&model=flux${apiKey ? `&key=${apiKey}` : ""}`;
+      // Gunakan seed berbasis tanggal hari ini agar gambar berubah setiap hari meskipun prompt sama
+      const seed = new Date().toISOString().split("T")[0].replace(/-/g, '');
+      const url = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?width=300&height=375&nologo=true&seed=${seed}&model=flux${apiKey ? `&key=${apiKey}` : ""}`;
       
       const aiResponse = await fetch(url);
       if (!aiResponse.ok) {
@@ -38,7 +40,8 @@ async function startServer() {
       
       const buffer = await aiResponse.arrayBuffer();
       res.set("Content-Type", "image/jpeg");
-      res.set("Cache-Control", "public, max-age=86400");
+      // Mencegah caching agresif oleh browser agar bisa refresh setiap hari
+      res.set("Cache-Control", "no-cache, no-store, must-revalidate");
       res.send(Buffer.from(buffer));
     } catch (error) {
       console.error("Error generating poster:", error);
@@ -47,6 +50,8 @@ async function startServer() {
   });
 
   app.get("/api/motivation", async (req, res) => {
+    // Hindari caching dari browser
+    res.set("Cache-Control", "no-cache, no-store, must-revalidate");
     try {
       const today = new Date().toISOString().split("T")[0];
       const forceRefresh = req.query.refresh === 'true';

@@ -1,7 +1,17 @@
 import { BookOpen, FileSpreadsheet, ShieldCheck, Box } from "lucide-react";
 import { motion } from "framer-motion";
 
-const ecosystemItems = [
+type EcosystemItem = {
+  icon: any;
+  title: string;
+  description: string;
+  stack: string;
+  url?: string;
+  comingSoon?: boolean;
+  hasTrial?: boolean;
+};
+
+const ecosystemItems: EcosystemItem[] = [
   {
     icon: BookOpen,
     title: "Generator KBM",
@@ -14,7 +24,8 @@ const ecosystemItems = [
     title: "Raport Instan",
     description: "Otomatisasi pengolahan nilai dan pengisian raport berbasis Kurikulum Merdeka.",
     stack: "Sheets • Apps Script",
-    url: "https://raportsks.my.id/"
+    url: "https://raportsks.my.id/",
+    hasTrial: true
   },
   {
     icon: ShieldCheck,
