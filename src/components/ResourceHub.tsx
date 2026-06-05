@@ -58,7 +58,7 @@ export function ResourceHub() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
           <h2 className="text-[18px] tracking-[0.2em] uppercase text-muted mb-[15px] font-[700] m-0 transition-colors duration-300">
-            Ruang Berbagi <span className="text-[10px] text-btn-bg ml-2 tracking-normal lowercase">(dalam pengembangan)</span>
+            Ruang Berbagi
           </h2>
           <p className="text-[18px] leading-[1.6] text-ink font-bold max-w-2xl m-0 transition-colors duration-300">
             Kumpulan sumber daya, template, dan perangkat pembelajaran yang bisa Anda unduh secara gratis.

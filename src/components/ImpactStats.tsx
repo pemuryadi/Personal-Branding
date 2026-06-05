@@ -58,7 +58,7 @@ export function ImpactStats() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-12 text-center">
           <h2 className="text-[18px] tracking-[0.2em] uppercase text-muted mb-[15px] font-[700] m-0 transition-colors duration-300">
-            Dampak Nyata <span className="text-[10px] text-btn-bg ml-2 tracking-normal lowercase">(dalam pengembangan)</span>
+            Dampak Nyata
           </h2>
           <p className="text-[18px] leading-[1.6] text-ink font-bold max-w-2xl mx-auto m-0 transition-colors duration-300">
             Berkontribusi dalam transformasi digital pendidikan di seluruh Indonesia.

@@ -1,43 +1,67 @@
 import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
+import { Quote, MessageSquare, X } from "lucide-react";
+import { useState } from "react";
 
 const testimonials = [
   {
     id: 1,
-    name: "Budi Santoso",
-    role: "Kepala Sekolah, SMPN 1 Maju",
-    text: "Aplikasi Raport Instan dan Generator KBM sangat membantu sekolah kami dalam efisiensi waktu guru. Luar biasa inovasinya!",
-    avatar: "BS"
+    name: "Ibu Rahmawati",
+    role: "Orang Tua Siswa (Kelas 7)",
+    text: "Semenjak ada materi interaktif, anak saya lebih semangat belajar. Terima kasih atas inovasinya dalam pendidikan!",
+    avatar: "IR"
   },
   {
     id: 2,
-    name: "Siti Rahmawati",
-    role: "Guru Penggerak Angkatan 7",
-    text: "Modul ajar yang dibagikan sangat sesuai dengan Kurikulum Merdeka. Template-nya mudah dimodifikasi dan sangat inspiratif.",
-    avatar: "SR"
+    name: "Bapak Herman",
+    role: "Orang Tua Siswa (Kelas 8)",
+    text: "Pemantauan nilai sangat transparan dan cepat. Kami sebagai orang tua sangat dimudahkan untuk mengetahui perkembangan anak.",
+    avatar: "BH"
   },
   {
     id: 3,
-    name: "Ahmad Fauzi",
-    role: "Wakil Kepala Kurikulum",
-    text: "Pelatihan pemanfaatan AI dalam pembelajaran yang diberikan sangat membuka wawasan. Penyampaiannya praktis dan langsung bisa diterapkan.",
-    avatar: "AF"
+    name: "Ibu Siti Aisyah",
+    role: "Wali Murid",
+    text: "Metode pengajaran yang menyenangkan dan sangat berpusat pada murid. Sangat menginspirasi!",
+    avatar: "SA"
   }
 ];
 
 export function Testimonials() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "success">("idle");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitStatus("submitting");
+    // Simulate API call
+    setTimeout(() => {
+      setSubmitStatus("success");
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setSubmitStatus("idle");
+      }, 2000);
+    }, 1000);
+  };
+
   return (
     <section id="testimoni" className="py-[60px] px-6 lg:px-8 transition-colors duration-300 bg-bg">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <h2 className="text-[18px] tracking-[0.2em] uppercase text-muted mb-[15px] font-[700] m-0 transition-colors duration-300">
-              Kata Mereka <span className="text-[10px] text-btn-bg ml-2 tracking-normal lowercase">(dalam pengembangan)</span>
+              Kata Mereka
             </h2>
             <p className="text-[18px] leading-[1.6] text-ink font-bold max-w-2xl m-0 transition-colors duration-300">
-              Testimoni dari rekan sejawat dan institusi yang telah merasakan manfaat langsung.
+              Testimoni dari orang tua siswa yang telah merasakan manfaat langsung.
             </p>
           </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-btn-bg text-bg font-bold rounded-lg hover:bg-btn-hover transition-colors shadow-sm"
+          >
+            <MessageSquare className="w-5 h-5" />
+            Beri Testimoni
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -67,6 +91,61 @@ export function Testimonials() {
           ))}
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-bg border border-border rounded-2xl p-6 md:p-8 w-full max-w-md relative shadow-xl"
+          >
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-muted hover:text-ink transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <h3 className="text-[24px] font-[900] tracking-tight text-ink mb-2">Tulis Testimoni</h3>
+            <p className="text-[14px] text-muted mb-6">Bagikan pengalaman Anda tentang layanan kami.</p>
+            
+            {submitStatus === "success" ? (
+              <div className="py-8 text-center">
+                <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                </div>
+                <h4 className="text-[18px] font-bold text-ink">Terima Kasih!</h4>
+                <p className="text-[14px] text-muted mt-2">Testimoni Anda telah terkirim.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-[14px] font-bold text-ink mb-1">Nama Lengkap</label>
+                  <input required type="text" className="w-full bg-card-from border border-border rounded-lg px-4 py-2.5 text-ink focus:outline-none focus:border-btn-bg transition-colors" placeholder="Misal: Budi Santoso" />
+                </div>
+                <div>
+                  <label className="block text-[14px] font-bold text-ink mb-1">Status / Peran</label>
+                  <input required type="text" className="w-full bg-card-from border border-border rounded-lg px-4 py-2.5 text-ink focus:outline-none focus:border-btn-bg transition-colors" placeholder="Misal: Orang Tua Siswa Kelas 7" />
+                </div>
+                <div>
+                  <label className="block text-[14px] font-bold text-ink mb-1">Pesan Testimoni</label>
+                  <textarea required rows={4} className="w-full bg-card-from border border-border rounded-lg px-4 py-2.5 text-ink focus:outline-none focus:border-btn-bg transition-colors resize-none" placeholder="Tuliskan pengalaman Anda..."></textarea>
+                </div>
+                <button 
+                  disabled={submitStatus === "submitting"}
+                  type="submit" 
+                  className="w-full bg-btn-bg text-bg font-bold py-3 rounded-lg hover:bg-btn-hover transition-colors mt-2 disabled:opacity-70 flex justify-center items-center"
+                >
+                  {submitStatus === "submitting" ? (
+                    <span className="w-5 h-5 border-2 border-bg border-t-transparent rounded-full animate-spin"></span>
+                  ) : (
+                    "Kirim Testimoni"
+                  )}
+                </button>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }
