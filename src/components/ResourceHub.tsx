@@ -39,16 +39,16 @@ const resources = [
     title: "Template Nilai Formatif",
     description: "Spreadsheet untuk merekap dan mengolah nilai formatif siswa.",
     icon: Layers,
-    type: "Google Sheets",
-    link: "/manajemen-nilai/Template-Nilai-Formatif.csv"
+    type: "Excel Workbook",
+    link: "/manajemen-nilai/Template-Nilai-Formatif.xlsx"
   },
   {
     id: 6,
     title: "Template Nilai Sumatif",
     description: "Spreadsheet untuk merekap dan mengolah nilai sumatif siswa.",
     icon: Layers,
-    type: "Google Sheets",
-    link: "/manajemen-nilai/Template-Nilai-Sumatif.csv"
+    type: "Excel Workbook",
+    link: "/manajemen-nilai/Template-Nilai-Sumatif.xlsx"
   }
 ];
 
