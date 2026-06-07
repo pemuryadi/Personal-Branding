@@ -99,7 +99,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
               </div>
 
               <a
-                href="https://wa.me/6281347697809"
+                href="https://wa.me/6281347697809?text=Hello%20pak%20Guru%2C%20saya%20mengunjungi%20website%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20sistem%20administrasi%20sekolah%20maupun%20pengembangan%20ekosistem%20pendidikan."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="whitespace-nowrap text-ink text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
@@ -170,7 +170,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
             </div>
 
             <a
-              href="https://wa.me/6281347697809"
+              href="https://wa.me/6281347697809?text=Hello%20pak%20Guru%2C%20saya%20mengunjungi%20website%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20lebih%20lanjut%20mengenai%20sistem%20administrasi%20sekolah%20maupun%20pengembangan%20ekosistem%20pendidikan."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
