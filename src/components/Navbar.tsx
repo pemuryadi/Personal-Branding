@@ -29,6 +29,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
     { name: "Home", tab: "home" },
     { name: "Ekosistem", tab: "ekosistem" },
     { name: "Portofolio", tab: "portofolio" },
+    { name: "Info Guru", tab: "info-guru" },
   ];
 
   const dropdownLinks = [
@@ -65,7 +66,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
                 <button
                   key={link.name}
                   onClick={() => handleTabClick(link.tab)}
-                  className={`text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
+                  className={`text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
                 >
                   {link.name}
                 </button>
@@ -76,7 +77,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
                 <button
                   onMouseEnter={() => setDropdownOpen(true)}
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className={`flex items-center gap-1 text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab.startsWith('unduhan-') ? 'text-btn-bg' : 'text-ink'}`}
+                  className={`flex items-center gap-1 text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab.startsWith('unduhan-') ? 'text-btn-bg' : 'text-ink'}`}
                 >
                   Unduhan <ChevronDown className="w-4 h-4" />
                 </button>
@@ -99,7 +100,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
 
               <a
                 href="mailto:p.e.muryadi@gmail.com"
-                className="text-ink text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
+                className="text-ink text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
               >
                 Kontak
               </a>
@@ -145,14 +146,14 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
               <button
                 key={link.name}
                 onClick={() => handleTabClick(link.tab)}
-                className={`block w-full text-left px-3 py-3 text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
+                className={`block w-full text-left px-3 py-3 text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
               >
                 {link.name}
               </button>
             ))}
             
             <div className="px-3 py-2">
-              <span className="block text-[18px] font-[700] tracking-[0.2em] uppercase text-ink mb-2">Unduhan</span>
+              <span className="block text-[16px] font-[700] tracking-[0.2em] uppercase text-ink mb-2">Unduhan</span>
               <div className="pl-4 space-y-2 border-l-2 border-border">
                 {dropdownLinks.map((dlink) => (
                   <button
@@ -169,7 +170,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
             <a
               href="mailto:p.e.muryadi@gmail.com"
               onClick={() => setIsOpen(false)}
-              className="block px-3 py-3 text-[18px] font-[700] tracking-[0.2em] uppercase text-ink hover:text-muted transition-colors duration-300"
+              className="block px-3 py-3 text-[16px] font-[700] tracking-[0.2em] uppercase text-ink hover:text-muted transition-colors duration-300"
             >
               Kontak
             </a>

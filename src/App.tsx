@@ -9,6 +9,7 @@ import { Footer } from '@/src/components/Footer';
 import { ImpactStats } from '@/src/components/ImpactStats';
 import { Testimonials } from '@/src/components/Testimonials';
 import { ResourceHub } from '@/src/components/ResourceHub';
+import { InfoGuru } from '@/src/components/InfoGuru';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -34,6 +35,9 @@ export default function App() {
           <Testimonials />
         </>
       );
+    }
+    if (activeTab === 'info-guru') {
+      return <InfoGuru />;
     }
     if (activeTab.startsWith('unduhan-')) {
       const category = activeTab.replace('unduhan-', '');
