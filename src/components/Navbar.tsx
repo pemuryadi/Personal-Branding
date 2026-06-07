@@ -60,13 +60,13 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
             </div>
           </div>
           
-          <div className="hidden md:flex items-center gap-10">
-            <div className="flex items-baseline space-x-[40px]">
+          <div className="hidden lg:flex items-center gap-6 lg:gap-10">
+            <div className="flex items-center gap-4 lg:gap-8">
               {links.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleTabClick(link.tab)}
-                  className={`text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
+                  className={`whitespace-nowrap text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
                 >
                   {link.name}
                 </button>
@@ -77,7 +77,7 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
                 <button
                   onMouseEnter={() => setDropdownOpen(true)}
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className={`flex items-center gap-1 text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab.startsWith('unduhan-') ? 'text-btn-bg' : 'text-ink'}`}
+                  className={`whitespace-nowrap flex items-center gap-1 text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab.startsWith('unduhan-') ? 'text-btn-bg' : 'text-ink'}`}
                 >
                   Unduhan <ChevronDown className="w-4 h-4" />
                 </button>
@@ -99,8 +99,10 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
               </div>
 
               <a
-                href="mailto:p.e.muryadi@gmail.com"
-                className="text-ink text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
+                href="https://wa.me/6281347697809"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap text-ink text-[16px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
               >
                 Kontak
               </a>
@@ -168,7 +170,9 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
             </div>
 
             <a
-              href="mailto:p.e.muryadi@gmail.com"
+              href="https://wa.me/6281347697809"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
               className="block px-3 py-3 text-[16px] font-[700] tracking-[0.2em] uppercase text-ink hover:text-muted transition-colors duration-300"
             >
