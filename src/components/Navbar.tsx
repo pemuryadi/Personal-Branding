@@ -75,21 +75,24 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
               <div className="relative" onMouseLeave={() => setDropdownOpen(false)}>
                 <button
                   onMouseEnter={() => setDropdownOpen(true)}
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
                   className={`flex items-center gap-1 text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab.startsWith('unduhan-') ? 'text-btn-bg' : 'text-ink'}`}
                 >
                   Unduhan <ChevronDown className="w-4 h-4" />
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute left-0 mt-2 w-64 bg-bg border border-border rounded-lg shadow-lg py-2 z-50">
-                    {dropdownLinks.map((dlink) => (
-                      <button
-                        key={dlink.name}
-                        onClick={() => handleTabClick(dlink.tab)}
-                        className={`block w-full text-left px-4 py-2 text-[14px] font-[700] uppercase hover:bg-border transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-ink'}`}
-                      >
-                        {dlink.name}
-                      </button>
-                    ))}
+                  <div className="absolute left-0 top-full pt-4 w-64 z-50">
+                    <div className="bg-bg border border-border rounded-lg shadow-lg py-2">
+                      {dropdownLinks.map((dlink) => (
+                        <button
+                          key={dlink.name}
+                          onClick={() => handleTabClick(dlink.tab)}
+                          className={`block w-full text-left px-4 py-3 text-[14px] font-[700] uppercase hover:bg-border transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-ink'}`}
+                        >
+                          {dlink.name}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
