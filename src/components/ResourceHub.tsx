@@ -2,63 +2,77 @@ import { motion } from "framer-motion";
 import { Download, FileText, Database, Layers } from "lucide-react";
 
 const resources = [
+  // Administrasi Sekolah
   {
     id: 1,
-    title: "Modul Ajar Bahasa Indonesia",
-    description: "Contoh Modul Ajar Bahasa Indonesia kelas 7 Kurikulum Merdeka.",
+    title: "Program Kerja Kepala Sekolah",
+    description: "Template dokumen perencanaan program jangka pendek, menengah, dan panjang.",
     icon: FileText,
     type: "Document",
-    link: "/modul-ajar/Modul-Ajar-Bahasa-Indonesia.txt"
+    link: "/administrasi-sekolah/Program-Kerja-Kepala-Sekolah.md",
+    category: "sekolah"
   },
   {
     id: 2,
-    title: "Modul Ajar Matematika",
-    description: "Contoh Modul Ajar Matematika kelas 8 Kurikulum Merdeka.",
-    icon: FileText,
-    type: "Document",
-    link: "/modul-ajar/Modul-Ajar-Matematika.txt"
+    title: "Format RKAS",
+    description: "Contoh Rencana Kegiatan dan Anggaran Sekolah untuk merencanakan anggaran.",
+    icon: Database,
+    type: "Spreadsheet",
+    link: "/administrasi-sekolah/Format-RKAS.csv",
+    category: "sekolah"
   },
   {
     id: 3,
-    title: "Prompt Skenario Pembelajaran",
-    description: "Prompt untuk AI membuat skenario pembelajaran berdiferensiasi.",
-    icon: Database,
-    type: "Notion Template",
-    link: "/prompt-ai/Prompt-Skenario-Pembelajaran.txt"
+    title: "Kalender Pendidikan",
+    description: "Contoh jadwal akademik tahun berjalan beserta rincian kegiatannya.",
+    icon: Layers,
+    type: "Document",
+    link: "/administrasi-sekolah/Kalender-Pendidikan.md",
+    category: "sekolah"
   },
+
+  // Administrasi Mengajar
   {
     id: 4,
-    title: "Prompt Generator Soal",
-    description: "Prompt untuk men-generate soal HOTS pilihan ganda.",
-    icon: Database,
-    type: "Notion Template",
-    link: "/prompt-ai/Prompt-Generator-Soal.txt"
+    title: "Modul Ajar Kurikulum Merdeka",
+    description: "Contoh modul ajar IPA SMP sesuai pedoman Kurikulum Merdeka terbaru.",
+    icon: FileText,
+    type: "Document",
+    link: "/administrasi-mengajar/Contoh-Modul-Ajar-Kurmer.md",
+    category: "mengajar"
   },
+
+  // Administrasi Kelas
   {
     id: 5,
-    title: "Template Nilai Formatif",
-    description: "Spreadsheet untuk merekap dan mengolah nilai formatif siswa.",
-    icon: Layers,
-    type: "Excel Workbook",
-    link: "/manajemen-nilai/Template-Nilai-Formatif.xlsx"
+    title: "Template Absensi & Jurnal Kelas",
+    description: "Spreadsheet pencatatan kehadiran dan rincian aktivitas pembelajaran.",
+    icon: Database,
+    type: "Spreadsheet",
+    link: "/administrasi-kelas/Template-Absensi-Jurnal.csv",
+    category: "kelas"
   },
+
+  // Prompt Poster
   {
     id: 6,
-    title: "Template Nilai Sumatif",
-    description: "Spreadsheet untuk merekap dan mengolah nilai sumatif siswa.",
-    icon: Layers,
-    type: "Excel Workbook",
-    link: "/manajemen-nilai/Template-Nilai-Sumatif.xlsx"
+    title: "Prompt Poster Anti-Perundungan",
+    description: "Prompt dasar untuk men-generate poster edukasi stop bullying menggunakan AI.",
+    icon: FileText,
+    type: "Text",
+    link: "/prompt-poster/Prompt-Poster-Anti-Bullying.txt",
+    category: "prompt"
   }
 ];
+export function ResourceHub({ category }: { category?: string }) {
+  const filteredResources = category ? resources.filter(r => r.category === category) : resources;
 
-export function ResourceHub() {
   return (
     <section id="resources" className="py-[60px] px-6 lg:px-8 transition-colors duration-300 bg-bg">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
           <h2 className="text-[18px] tracking-[0.2em] uppercase text-muted mb-[15px] font-[700] m-0 transition-colors duration-300">
-            Ruang Berbagi
+            Ruang Berbagi {category && `- Administrasi ${category.charAt(0).toUpperCase() + category.slice(1)}`}
           </h2>
           <p className="text-[18px] leading-[1.6] text-ink font-bold max-w-2xl m-0 transition-colors duration-300">
             Kumpulan sumber daya, template, dan perangkat pembelajaran yang bisa Anda unduh secara gratis.
@@ -66,7 +80,7 @@ export function ResourceHub() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {resources.map((resource, index) => (
+          {filteredResources.map((resource, index) => (
             <motion.a
               href={resource.link}
               key={resource.id}

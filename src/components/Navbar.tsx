@@ -1,10 +1,16 @@
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 
-export function Navbar() {
+interface NavbarProps {
+  activeTab?: string;
+  setActiveTab?: (tab: string) => void;
+}
+
+export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [time, setTime] = useState(new Date());
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
@@ -20,12 +26,23 @@ export function Navbar() {
   }, [isDark]);
 
   const links = [
-    { name: "Home", href: "#home" },
-    { name: "Ekosistem", href: "#ekosistem" },
-    { name: "Portofolio", href: "#portofolio" },
-    { name: "Unduhan", href: "#resources" },
-    { name: "Kontak", href: "mailto:p.e.muryadi@gmail.com" },
+    { name: "Home", tab: "home" },
+    { name: "Ekosistem", tab: "ekosistem" },
+    { name: "Portofolio", tab: "portofolio" },
   ];
+
+  const dropdownLinks = [
+    { name: "Administrasi Sekolah", tab: "unduhan-sekolah" },
+    { name: "Administrasi Mengajar", tab: "unduhan-mengajar" },
+    { name: "Administrasi Kelas", tab: "unduhan-kelas" },
+    { name: "Prompt Poster", tab: "unduhan-prompt" },
+  ];
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+    setIsOpen(false);
+    setDropdownOpen(false);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-bg border-b border-border py-[15px] transition-colors duration-300">
@@ -45,14 +62,44 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-10">
             <div className="flex items-baseline space-x-[40px]">
               {links.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-ink text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
+                  onClick={() => handleTabClick(link.tab)}
+                  className={`text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
+              
+              {/* Dropdown for Unduhan */}
+              <div className="relative" onMouseLeave={() => setDropdownOpen(false)}>
+                <button
+                  onMouseEnter={() => setDropdownOpen(true)}
+                  className={`flex items-center gap-1 text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab.startsWith('unduhan-') ? 'text-btn-bg' : 'text-ink'}`}
+                >
+                  Unduhan <ChevronDown className="w-4 h-4" />
+                </button>
+                {dropdownOpen && (
+                  <div className="absolute left-0 mt-2 w-64 bg-bg border border-border rounded-lg shadow-lg py-2 z-50">
+                    {dropdownLinks.map((dlink) => (
+                      <button
+                        key={dlink.name}
+                        onClick={() => handleTabClick(dlink.tab)}
+                        className={`block w-full text-left px-4 py-2 text-[14px] font-[700] uppercase hover:bg-border transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-ink'}`}
+                      >
+                        {dlink.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <a
+                href="mailto:p.e.muryadi@gmail.com"
+                className="text-ink text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300"
+              >
+                Kontak
+              </a>
             </div>
 
             <div className="flex items-center gap-2">
@@ -92,15 +139,37 @@ export function Navbar() {
         <div className="md:hidden bg-bg border-t border-border mt-[15px] transition-colors duration-300">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {links.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block px-3 py-3 text-[18px] font-[700] tracking-[0.2em] uppercase text-ink hover:text-muted transition-colors duration-300"
+                onClick={() => handleTabClick(link.tab)}
+                className={`block w-full text-left px-3 py-3 text-[18px] font-[700] tracking-[0.2em] uppercase hover:text-muted transition-colors duration-300 ${activeTab === link.tab ? 'text-btn-bg' : 'text-ink'}`}
               >
                 {link.name}
-              </a>
+              </button>
             ))}
+            
+            <div className="px-3 py-2">
+              <span className="block text-[18px] font-[700] tracking-[0.2em] uppercase text-ink mb-2">Unduhan</span>
+              <div className="pl-4 space-y-2 border-l-2 border-border">
+                {dropdownLinks.map((dlink) => (
+                  <button
+                    key={dlink.name}
+                    onClick={() => handleTabClick(dlink.tab)}
+                    className={`block w-full text-left py-2 text-[14px] font-[700] uppercase transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-muted hover:text-ink'}`}
+                  >
+                    {dlink.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <a
+              href="mailto:p.e.muryadi@gmail.com"
+              onClick={() => setIsOpen(false)}
+              className="block px-3 py-3 text-[18px] font-[700] tracking-[0.2em] uppercase text-ink hover:text-muted transition-colors duration-300"
+            >
+              Kontak
+            </a>
           </div>
         </div>
       )}

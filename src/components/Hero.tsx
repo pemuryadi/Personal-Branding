@@ -11,9 +11,9 @@ export function Hero() {
           transition={{ duration: 0.5 }}
           className="flex-1"
         >
-          <h1 className="text-5xl md:text-[clamp(4rem,7vw,100px)] font-[900] leading-[0.8] tracking-[-0.05em] text-left uppercase text-ink m-0 transition-colors duration-300">
-            Transformasi<br/>Administrasi<br/>Sekolah <br className="hidden md:block" />
-            <span className="text-muted transition-colors duration-300 block mt-4">Paperless & Berbasis AI</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-[900] leading-tight tracking-tight text-left uppercase text-ink m-0 transition-colors duration-300">
+            Transformasi<br/>Administrasi<br/>Sekolah
+            <span className="text-muted transition-colors duration-300 block mt-2">Paperless & Berbasis AI</span>
           </h1>
         </motion.div>
       </div>

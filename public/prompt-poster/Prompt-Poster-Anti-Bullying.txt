@@ -1,0 +1,14 @@
+=== PROMPT DASAR UNTUK POSTER ANTI-PERUNDUNGAN (ANTI-BULLYING) ===
+
+Gunakan prompt ini di AI image generator pilihan Anda (seperti Midjourney, DALL-E 3, atau Bing Image Creator).
+Anda bisa memodifikasi kata-kata di dalam kurung siku [...] sesuai dengan kebutuhan desain Anda.
+
+-- Versi Bahasa Indonesia --
+"Buatkan desain poster edukasi berukuran potret (portrait) tentang kampanye Stop Bullying di lingkungan sekolah. Gambar utama menampilkan [sekelompok siswa dari berbagai latar belakang sedang bergandengan tangan atau saling merangkul sambil tersenyum bahagia di koridor sekolah yang terang]. Gaya seni visualnya adalah [ilustrasi vektor 2D modern / semi-realistis / gaya anime ceria] dengan palet warna yang [cerah, hangat, dan positif seperti biru muda, kuning, dan hijau]. Di bagian atas poster, berikan ruang kosong atau banner untuk teks judul. Suasana keseluruhan harus membangkitkan perasaan aman, persahabatan, dan empati."
+
+-- Versi Bahasa Inggris (Disarankan untuk hasil AI yang lebih akurat) --
+"Create a portrait-sized educational poster design for a Stop Bullying campaign in a school environment. The main image features [a diverse group of students holding hands or hugging each other with happy smiles in a bright school hallway]. The visual art style is [modern 2D vector illustration / semi-realistic / cheerful anime style] with a color palette that is [bright, warm, and positive such as light blue, yellow, and green]. At the top of the poster, leave an empty space or banner for title text. The overall atmosphere should evoke feelings of safety, friendship, and empathy. No text."
+
+Tips Tambahan:
+- Tambahkan kata kunci "No text" atau "Without text" jika AI Anda sering menghasilkan teks bahasa yang berantakan (typo). Anda bisa menambahkan teks sendiri menggunakan Canva atau aplikasi desain lainnya.
+- Ganti gaya seni (art style) menjadi "3D Pixar style" atau "minimalist flat design" untuk variasi visual.
