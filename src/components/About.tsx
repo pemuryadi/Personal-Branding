@@ -45,9 +45,7 @@ export function About() {
               untuk memajukan ekosistem pendidikan di Indonesia. Fokus utama saya adalah memfasilitasi transisi menuju 
               administrasi sekolah yang <strong className="text-ink transition-colors duration-300">paperless</strong> dan integrasi <strong className="text-ink transition-colors duration-300">Kurikulum Merdeka</strong> dengan solusi digital yang efisien.
             </p>
-            <p>
-              Dengan pengalaman dalam merancang alur kerja yang terotomasi menggunakan <strong className="text-ink transition-colors duration-300">Website</strong> dan infrastruktur Claud lainnya, saya membantu para pendidik dan manajemen sekolah untuk secara drastis mengurangi beban rutin administratif. Hal ini memungkinkan setiap guru untuk kembali berfokus pada apa yang paling penting: kualitas pengajaran dan interaksi dengan siswa.
-            </p>
+
             <p>
               Saya percaya inovasi tidak harus selalu rumit dan mahal. Melalui alat-alat sehari-hari yang sudah tersedia, 
               kita bisa menciptakan sistem manajemen dan operasional yang tangguh, mudah digunakan, dan berdampak tinggi.
