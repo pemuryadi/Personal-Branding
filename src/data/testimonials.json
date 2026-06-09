@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Ibu Rahmawati",
+    "role": "Orang Tua Siswa (Kelas 7)",
+    "text": "Semenjak ada materi interaktif, anak saya lebih semangat belajar. Terima kasih atas inovasinya dalam pendidikan!",
+    "avatar": "IR"
+  },
+  {
+    "id": 2,
+    "name": "Bapak Herman",
+    "role": "Orang Tua Siswa (Kelas 8)",
+    "text": "Pemantauan nilai sangat transparan dan cepat. Kami sebagai orang tua sangat dimudahkan untuk mengetahui perkembangan anak.",
+    "avatar": "BH"
+  },
+  {
+    "id": 3,
+    "name": "Ibu Siti Aisyah",
+    "role": "Wali Murid",
+    "text": "Metode pengajaran yang menyenangkan dan sangat berpusat pada murid. Sangat menginspirasi!",
+    "avatar": "SA"
+  },
+  {
+    "id": 4,
+    "name": "Bapak Yudi Pratama",
+    "role": "Orang Tua Siswa (Kelas 9)",
+    "text": "Fitur yang disediakan sungguh memudahkan saya memantau aktivitas belajar anak. Sangat praktis dan informatif!",
+    "avatar": "YP"
+  }
+]

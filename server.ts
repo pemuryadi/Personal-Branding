@@ -3,12 +3,16 @@ import path from "path";
 import fs from "fs";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
+import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
 
 dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 async function startServer() {
   const app = express();
+  app.use(express.json());
+  app.use(cookieParser());
   // Enable trust proxy so we get real IPs if deployed behind reverse proxy
   app.set("trust proxy", true);
   const PORT = 3000;
@@ -21,6 +25,149 @@ async function startServer() {
   // API routes FIRST
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret-key-for-local";
+  const TURNSTILE_SECRET = process.env.TURNSTILE_SECRET_KEY || "1x0000000000000000000000000000000AA"; // Dummy valid key for testing
+
+  // Auth endpoints
+  app.get("/api/auth/google", (req, res) => {
+    const clientId = process.env.GOOGLE_CLIENT_ID;
+    const redirectUri = `${req.protocol}://${req.get("host")}/api/auth/google/callback`;
+    
+    if (!clientId) {
+      // Simulate login for local testing
+      const token = jwt.sign({ name: "Pengunjung Tes", avatar: "PT" }, JWT_SECRET, { expiresIn: "1h" });
+      res.cookie("auth_token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+      return res.redirect("/?login=success");
+    }
+
+    const scope = "profile email";
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+    res.redirect(authUrl);
+  });
+
+  app.get("/api/auth/google/callback", async (req, res) => {
+    const code = req.query.code;
+    if (!code) return res.redirect("/");
+
+    try {
+      const clientId = process.env.GOOGLE_CLIENT_ID;
+      const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+      const redirectUri = `${req.protocol}://${req.get("host")}/api/auth/google/callback`;
+
+      const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          code: code as string,
+          client_id: clientId!,
+          client_secret: clientSecret!,
+          redirect_uri: redirectUri,
+          grant_type: "authorization_code"
+        })
+      });
+      
+      const tokenData = await tokenRes.json();
+      if (!tokenData.access_token) throw new Error("Failed to get access token");
+
+      const userRes = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+        headers: { Authorization: `Bearer ${tokenData.access_token}` }
+      });
+      const userData = await userRes.json();
+
+      const initials = userData.name.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase();
+      const token = jwt.sign({ name: userData.name, avatar: initials }, JWT_SECRET, { expiresIn: "24h" });
+      
+      res.cookie("auth_token", token, { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+      res.redirect("/?login=success");
+    } catch (err) {
+      console.error("OAuth error:", err);
+      res.redirect("/?login=error");
+    }
+  });
+
+  app.get("/api/auth/me", (req, res) => {
+    const token = req.cookies.auth_token;
+    if (!token) return res.json({ user: null });
+    
+    try {
+      const user = jwt.verify(token, JWT_SECRET);
+      res.json({ user });
+    } catch (err) {
+      res.json({ user: null });
+    }
+  });
+
+  app.post("/api/auth/logout", (req, res) => {
+    res.clearCookie("auth_token");
+    res.json({ success: true });
+  });
+
+  // Testimonial Endpoints
+  app.get("/api/testimonials", async (req, res) => {
+    try {
+      const dataPath = path.join(process.cwd(), "src", "data", "testimonials.json");
+      const data = await fs.promises.readFile(dataPath, "utf-8");
+      res.json(JSON.parse(data));
+    } catch (err) {
+      res.status(500).json({ error: "Failed to read testimonials" });
+    }
+  });
+
+  app.post("/api/testimonials", async (req, res) => {
+    const token = req.cookies.auth_token;
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
+
+    let user;
+    try {
+      user = jwt.verify(token, JWT_SECRET) as any;
+    } catch (err) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+
+    const { role, text, cfTurnstileResponse } = req.body;
+    if (!role || !text || !cfTurnstileResponse) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    try {
+      const cfVerify = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: TURNSTILE_SECRET,
+          response: cfTurnstileResponse
+        })
+      });
+      const cfData = await cfVerify.json();
+      
+      if (!cfData.success && TURNSTILE_SECRET !== "1x0000000000000000000000000000000AA") {
+        return res.status(400).json({ error: "Turnstile verification failed" });
+      }
+    } catch (err) {
+      return res.status(500).json({ error: "Turnstile verification error" });
+    }
+
+    try {
+      const dataPath = path.join(process.cwd(), "src", "data", "testimonials.json");
+      const data = JSON.parse(await fs.promises.readFile(dataPath, "utf-8"));
+      
+      const newTestimonial = {
+        id: data.length > 0 ? Math.max(...data.map((d: any) => d.id)) + 1 : 1,
+        name: user.name,
+        role: role,
+        text: text,
+        avatar: user.avatar
+      };
+      
+      data.push(newTestimonial);
+      await fs.promises.writeFile(dataPath, JSON.stringify(data, null, 2));
+      
+      res.json(newTestimonial);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to save testimonial" });
+    }
   });
 
   app.get("/api/poster", async (req, res) => {
