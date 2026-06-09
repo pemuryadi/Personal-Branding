@@ -23,6 +23,13 @@ const testimonials = [
     role: "Wali Murid",
     text: "Metode pengajaran yang menyenangkan dan sangat berpusat pada murid. Sangat menginspirasi!",
     avatar: "SA"
+  },
+  {
+    id: 4,
+    name: "Bapak Yudi Pratama",
+    role: "Orang Tua Siswa (Kelas 9)",
+    text: "Fitur yang disediakan sungguh memudahkan saya memantau aktivitas belajar anak. Sangat praktis dan informatif!",
+    avatar: "YP"
   }
 ];
 
@@ -64,7 +71,7 @@ export function Testimonials() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {testimonials.map((item, index) => (
             <motion.div
               key={item.id}
