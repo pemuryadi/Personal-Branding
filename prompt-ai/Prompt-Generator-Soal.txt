@@ -1,0 +1,2 @@
+Contoh Prompt Generator Soal:
+"Buatkan 10 soal pilihan ganda tingkat HOTS tentang [Materi] beserta kunci jawabannya."

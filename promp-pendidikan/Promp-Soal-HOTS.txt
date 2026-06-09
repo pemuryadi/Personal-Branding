@@ -1,0 +1,3 @@
+Promp untuk membuat soal HOTS (High Order Thinking Skills):
+
+"Sebagai guru mata pelajaran [Mata Pelajaran] kelas [Kelas], tolong buatkan 5 soal pilihan ganda HOTS (menganalisis, mengevaluasi, mencipta) beserta kunci jawaban dan pembahasannya. Materi soal tentang [Topik Materi]. Pastikan stimulus berupa wacana kontekstual atau infografis teks."
