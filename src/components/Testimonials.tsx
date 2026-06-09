@@ -44,7 +44,12 @@ export function Testimonials() {
 
   useEffect(() => {
     fetchTestimonials();
-    checkAuth();
+    checkAuth().then(() => {
+      if (window.location.search.includes("login=success")) {
+        setIsModalOpen(true);
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+      }
+    });
   }, []);
 
   const handleLogout = async () => {

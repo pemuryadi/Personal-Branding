@@ -18,7 +18,7 @@ export async function onRequestGet(context: any) {
     return new Response(null, {
       status: 302,
       headers: {
-        "Location": "/?login=success",
+        "Location": "/?login=success#testimoni",
         "Set-Cookie": `auth_token=${token}; Path=/; HttpOnly`
       }
     });
