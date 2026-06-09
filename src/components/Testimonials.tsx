@@ -48,8 +48,17 @@ export function Testimonials() {
       if (window.location.search.includes("login=success")) {
         setIsModalOpen(true);
         window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
+      } else if (window.location.search.includes("login=error")) {
+        alert("Login Google gagal. Pastikan konfigurasi Client ID dan Secret di Cloudflare sudah benar dan sesuai dengan URL website Anda.");
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
       }
     });
+
+    if (window.location.hash === '#testimoni') {
+      setTimeout(() => {
+        document.getElementById('testimoni')?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
   }, []);
 
   const handleLogout = async () => {

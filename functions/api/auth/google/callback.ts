@@ -52,6 +52,6 @@ export async function onRequestGet(context: any) {
     });
   } catch (err) {
     console.error("OAuth error:", err);
-    return new Response(null, { status: 302, headers: { "Location": "/?login=error" } });
+    return new Response(null, { status: 302, headers: { "Location": "/?login=error#testimoni" } });
   }
 }
