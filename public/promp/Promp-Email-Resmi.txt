@@ -1,0 +1,6 @@
+Promp untuk membuat email profesional/resmi:
+
+1. "Buatkan draft email resmi untuk mengundang Bapak/Ibu Kepala Sekolah ke rapat kordinasi komite sekolah hari [Tanggal], jam [Waktu]."
+2. "Tuliskan balasan sopan untuk menolak tawaran kerja sama dari vendor [Nama Vendor], karena anggaran belum tersedia."
+3. "Buatkan email pemberitahuan ke wali murid mengenai libur nasional dan penyesuaian jadwal ulangan harian."
+4. "Tolong revisi email ini agar lebih profesional dan tidak terkesan kasar: [Teks Email Asli]"

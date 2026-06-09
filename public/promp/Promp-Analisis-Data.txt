@@ -1,0 +1,6 @@
+Gunakan promp berikut untuk menganalisis data di Excel:
+
+1. "Saya memiliki tabel data penjualan bulanan dengan kolom Tanggal, Produk, dan Jumlah. Tolong berikan rumus Excel untuk menghitung total penjualan produk X."
+2. "Analisis data berikut dan temukan 3 tren utama: [Copy/Paste Data]"
+3. "Buatlah makro VBA sederhana untuk mengurutkan kolom A dari besar ke kecil secara otomatis."
+4. "Bagaimana cara membuat Pivot Table untuk menampilkan ringkasan performa penjualan tiap tenaga penjual dari data mentah ini?"

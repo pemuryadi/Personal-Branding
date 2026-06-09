@@ -1,0 +1,7 @@
+Berikut adalah kumpulan promp dasar yang bisa Anda gunakan:
+
+1. "Jelaskan konsep [Masukkan Topik] secara sederhana seperti menjelaskan kepada anak SD."
+2. "Berikan 3 ide kreatif untuk mengatasi masalah [Masukkan Masalah]."
+3. "Buatlah ringkasan singkat dalam 3 poin utama dari teks berikut: [Masukkan Teks]"
+4. "Terjemahkan kalimat berikut ke dalam bahasa Inggris yang formal: [Masukkan Kalimat]"
+5. "Berikan daftar periksa (checklist) langkah demi langkah untuk [Masukkan Aktivitas]."

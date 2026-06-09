@@ -1,0 +1,3 @@
+Promp untuk membuat Modul Ajar Kurikulum Merdeka:
+
+"Tolong buatkan draf Modul Ajar / Rencana Pelaksanaan Pembelajaran (RPP) dengan format Kurikulum Merdeka untuk mata pelajaran [Mata Pelajaran] tingkat [Tingkat/Kelas]. Topik pembelajarannya adalah [Topik]. Cantumkan Tujuan Pembelajaran, Profil Pelajar Pancasila yang disasar, Kegiatan Pendahuluan, Inti, dan Penutup, serta rencana asesmen singkat."
