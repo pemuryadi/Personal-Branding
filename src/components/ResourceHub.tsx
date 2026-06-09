@@ -63,6 +63,25 @@ const resources = [
     link: "/promp/Kumpulan-Promp-Dasar.txt",
     category: "promp"
   },
+  {
+    id: 10,
+    title: "Promp Analisis Data Excel",
+    description: "Promp untuk meminta AI menganalisis data, mencari pola, dan membuat rumus Excel otomatis.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp/Promp-Analisis-Data.txt",
+    category: "promp"
+  },
+  {
+    id: 11,
+    title: "Promp Pembuatan Email Resmi",
+    description: "Promp untuk menyusun email dinas, undangan, atau komunikasi formal lainnya.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp/Promp-Email-Resmi.txt",
+    category: "promp"
+  },
+
   // Promp Pendidikan
   {
     id: 7,
@@ -73,6 +92,25 @@ const resources = [
     link: "/promp-pendidikan/Promp-Soal-HOTS.txt",
     category: "promp-pendidikan"
   },
+  {
+    id: 12,
+    title: "Promp Modul Ajar (RPP)",
+    description: "Promp untuk men-generate struktur dasar Modul Ajar Kurikulum Merdeka yang siap pakai.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-pendidikan/Promp-Modul-Ajar.txt",
+    category: "promp-pendidikan"
+  },
+  {
+    id: 13,
+    title: "Promp Penilaian Karakter (P5)",
+    description: "Promp untuk membantu merumuskan rubrik observasi dan penilaian Proyek Penguatan Profil Pelajar Pancasila.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-pendidikan/Promp-Penilaian-Karakter.txt",
+    category: "promp-pendidikan"
+  },
+
   // Promp Gambar Surreal
   {
     id: 8,
@@ -83,6 +121,25 @@ const resources = [
     link: "/promp-surreal/Promp-Gambar-Surreal.txt",
     category: "promp-surreal"
   },
+  {
+    id: 14,
+    title: "Promp Kota Masa Depan Abstrak",
+    description: "Promp spesifik untuk menghasilkan lanskap kota futuristik dengan pencahayaan neon yang surealis.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-surreal/Promp-Kota-Futuristik.txt",
+    category: "promp-surreal"
+  },
+  {
+    id: 15,
+    title: "Promp Alam Bawah Sadar (Dreamscape)",
+    description: "Promp untuk merancang visual yang terinspirasi dari mimpi dengan objek-objek melayang.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-surreal/Promp-Dreamscape.txt",
+    category: "promp-surreal"
+  },
+
   // Promp Gambar Poster
   {
     id: 9,
@@ -91,6 +148,24 @@ const resources = [
     icon: FileText,
     type: "Text",
     link: "/promp-poster/Promp-Poster-Edukasi.txt",
+    category: "promp-poster"
+  },
+  {
+    id: 16,
+    title: "Promp Poster Kebersihan Lingkungan",
+    description: "Promp mendetail untuk membuat desain poster kampanye 'Go Green' dan daur ulang sampah di sekolah.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-poster/Promp-Poster-Kebersihan.txt",
+    category: "promp-poster"
+  },
+  {
+    id: 17,
+    title: "Promp Poster Hari Kemerdekaan",
+    description: "Promp untuk desain poster perayaan 17 Agustus dengan nuansa semangat nasionalisme.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-poster/Promp-Poster-Kemerdekaan.txt",
     category: "promp-poster"
   }
 ];

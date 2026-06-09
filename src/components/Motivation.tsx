@@ -147,7 +147,7 @@ export function Motivation() {
                       <div className="h-3 bg-border rounded w-5/6"></div>
                     </div>
                   ) : (
-                    <div className="text-[14px] md:text-[15px] leading-relaxed text-ink italic font-medium whitespace-pre-line text-justify">
+                    <div className="text-[18px] md:text-[18px] leading-relaxed text-ink italic font-medium whitespace-pre-line text-justify">
                       "{motivation}"
                     </div>
                   )}
