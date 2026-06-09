@@ -11,6 +11,12 @@ type InfoItem = {
 const infoItems: InfoItem[] = [
   {
     icon: Newspaper,
+    title: "Peluncuran Fitur Baru: Pengelolaan Kelas Berbasis AI",
+    date: "Baru",
+    content: "Merespon kebutuhan guru akan efisiensi waktu, kini hadir fitur pengelolaan kelas berbasis Artificial Intelligence (AI) yang terintegrasi langsung dengan sistem administrasi. Fitur ini dirancang untuk mempermudah guru dalam menganalisis perkembangan belajar siswa secara otomatis serta memberikan rekomendasi strategi pembelajaran yang lebih personal dan tepat sasaran."
+  },
+  {
+    icon: Newspaper,
     title: "Penetapan 'Hari Belajar Guru' Nasional",
     date: "Sedang Berjalan",
     content: "Kementerian Pendidikan Dasar dan Menengah (Kemendikdasmen) resmi menetapkan program 'Hari Belajar Guru' yang dilaksanakan satu kali dalam seminggu. Program ini merupakan inisiatif strategis untuk memberikan ruang khusus bagi para guru di seluruh Indonesia agar dapat saling berbagi praktik baik, meningkatkan kompetensi pedagogik, serta melakukan inovasi pembelajaran. Pelaksanaan program ini telah dirancang secara khusus agar tidak mengganggu jadwal mengajar murid di kelas, sehingga peningkatan kualitas guru dan hak belajar siswa dapat berjalan beriringan."

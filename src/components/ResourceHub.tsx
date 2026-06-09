@@ -53,15 +53,45 @@ const resources = [
     category: "kelas"
   },
 
-  // Prompt Poster
+  // Promp
   {
     id: 6,
-    title: "Prompt Poster Anti-Perundungan",
-    description: "Prompt dasar untuk men-generate poster edukasi stop bullying menggunakan AI.",
+    title: "Kumpulan Promp Dasar",
+    description: "Kumpulan promp dasar untuk berbagai kebutuhan interaksi dengan AI.",
     icon: FileText,
     type: "Text",
-    link: "/prompt-poster/Prompt-Poster-Anti-Bullying.txt",
-    category: "prompt"
+    link: "/promp/Kumpulan-Promp-Dasar.txt",
+    category: "promp"
+  },
+  // Promp Pendidikan
+  {
+    id: 7,
+    title: "Promp Pembuatan Soal HOTS",
+    description: "Promp khusus untuk membantu guru membuat soal High Order Thinking Skills.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-pendidikan/Promp-Soal-HOTS.txt",
+    category: "promp-pendidikan"
+  },
+  // Promp Gambar Surreal
+  {
+    id: 8,
+    title: "Promp Gambar Surrealisme",
+    description: "Promp untuk men-generate gambar dengan gaya surreal menggunakan AI gambar.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-surreal/Promp-Gambar-Surreal.txt",
+    category: "promp-surreal"
+  },
+  // Promp Gambar Poster
+  {
+    id: 9,
+    title: "Promp Poster Edukasi",
+    description: "Promp dasar untuk men-generate poster edukasi yang menarik dengan AI.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-poster/Promp-Poster-Edukasi.txt",
+    category: "promp-poster"
   }
 ];
 export function ResourceHub({ category }: { category?: string }) {

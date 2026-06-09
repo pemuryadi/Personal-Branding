@@ -22,6 +22,7 @@ export default function App() {
           <Motivation />
           <ImpactStats />
           <About />
+          <Testimonials />
         </>
       );
     }
@@ -32,7 +33,6 @@ export default function App() {
       return (
         <>
           <Portfolio />
-          <Testimonials />
         </>
       );
     }

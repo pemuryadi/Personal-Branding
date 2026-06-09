@@ -36,7 +36,10 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
     { name: "Administrasi Sekolah", tab: "unduhan-sekolah" },
     { name: "Administrasi Mengajar", tab: "unduhan-mengajar" },
     { name: "Administrasi Kelas", tab: "unduhan-kelas" },
-    { name: "Prompt Poster", tab: "unduhan-prompt" },
+    { name: "Promp", tab: "unduhan-promp" },
+    { name: "Promp Pendidikan", tab: "unduhan-promp-pendidikan" },
+    { name: "Promp Gambar Surreal", tab: "unduhan-promp-surreal" },
+    { name: "Promp Gambar Poster", tab: "unduhan-promp-poster" },
   ];
 
   const handleTabClick = (tab: string) => {
