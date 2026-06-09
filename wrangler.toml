@@ -1,0 +1,8 @@
+name = "pemuryadi-hub"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-03-20"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "testimonials"
+database_id = "paste-your-d1-id-here" # Ganti dengan ID Database D1 Anda
