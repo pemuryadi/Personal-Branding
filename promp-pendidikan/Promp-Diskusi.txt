@@ -1,0 +1,7 @@
+Kamu adalah seorang fasilitator pendidikan yang berpengalaman. Saya ingin memantik diskusi di kelas dengan siswa kelas [sebutkan tingkat kelas] mengenai topik [sebutkan topik diskusi].
+
+Tolong buatkan:
+1. 1 Pertanyaan pemantik utama yang kontroversial (dalam arti positif) atau menantang untuk merangsang rasa ingin tahu.
+2. 3 Pertanyaan lanjutan (probing questions) untuk menggali lebih dalam pendapat siswa saat diskusi mulai berjalan.
+3. Skenario singkat atau studi kasus (1 paragraf) yang relevan dengan topik untuk diberikan di awal sebelum diskusi dimulai.
+4. Tips singkat untuk saya sebagai guru agar diskusi tetap inklusif dan semua siswa berani berbicara.

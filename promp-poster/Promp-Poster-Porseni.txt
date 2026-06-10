@@ -1,0 +1,6 @@
+A vibrant and energetic poster design for a school sports and arts week (Porseni). 
+The poster should feature dynamic silhouettes of students engaged in various activities like playing basketball, running, singing, and painting. 
+The background should have abstract, energetic waves or geometric shapes in bright, youthful colors like electric blue, bright yellow, and hot pink. 
+Include placeholders for text like "PORSENI 2024", "Unleash Your Talent", and "Date/Location". 
+The style should be modern, flat design with a touch of 3D elements, highly detailed, vibrant lighting, and appealing to teenagers. 
+--ar 3:4 --v 6.0

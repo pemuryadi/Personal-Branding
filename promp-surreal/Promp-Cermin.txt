@@ -1,0 +1,7 @@
+A surreal mirror world illusion where the boundary between sky and underwater is completely blurred and symmetrical. 
+The top half of the image shows a beautiful, starry night sky with glowing auroras and a crescent moon. 
+The bottom half is an underwater scene showing a glowing coral reef and ethereal jellyfish. 
+The horizon line in the middle is a perfect mirror reflection where the stars turn into glowing plankton, and the moon turns into a glowing pearl in a giant clam. 
+The colors should be deep indigo, bioluminescent blue, and glowing turquoise. 
+Highly detailed, 8k, cinematic lighting, masterpiece, surrealism, digital art. 
+--ar 16:9 --v 6.0

@@ -1,0 +1,7 @@
+A surreal crystal forest landscape where organic nature merges with perfect geometric materials. 
+The trees have trunks made of dark, rough bark, but the leaves and branches are entirely made of glowing, translucent geometric crystals (diamonds, quartz, and amethyst). 
+The ground is covered in soft, glowing moss with small floating geometric shapes like pyramids and cubes hovering above it. 
+A soft, ethereal mist rolls through the forest. 
+The lighting is cinematic and dramatic, with light refracting through the crystal leaves, creating colorful prisms on the ground. 
+Fantasy, surrealist art, hyper-realistic, 8k resolution, Unreal Engine 5 render style. 
+--ar 16:9 --v 6.0

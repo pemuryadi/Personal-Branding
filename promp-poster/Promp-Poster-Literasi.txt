@@ -1,0 +1,7 @@
+A creative and inspiring literacy campaign poster for a school library. 
+The central image should be an open magical book with glowing light, stars, floating letters, and small imaginative worlds (like a tiny castle, a rocket, and a magical forest) coming out of its pages. 
+The background should be a cozy, warmly lit library with tall bookshelves. 
+The color palette should be warm and inviting (golds, deep blues, and warm oranges). 
+Leave space at the top and bottom for typography like "Buka Buku, Buka Dunia" or "Let's Read Together". 
+The style should be magical realism, digital painting, highly detailed, fantasy, and uplifting. 
+--ar 3:4 --v 6.0
