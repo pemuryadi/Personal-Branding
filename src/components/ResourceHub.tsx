@@ -30,6 +30,24 @@ const resources = [
     link: "/administrasi-sekolah/Kalender-Pendidikan.md",
     category: "sekolah"
   },
+  {
+    id: 101,
+    title: "Tata Tertib Sekolah",
+    description: "Contoh pedoman tata tertib guru dan siswa di lingkungan sekolah.",
+    icon: FileText,
+    type: "Document",
+    link: "/administrasi-sekolah/Tata-Tertib.md",
+    category: "sekolah"
+  },
+  {
+    id: 102,
+    title: "Buku Induk Siswa",
+    description: "Format buku induk untuk pendataan siswa secara menyeluruh.",
+    icon: Database,
+    type: "Spreadsheet",
+    link: "/administrasi-sekolah/Buku-Induk.csv",
+    category: "sekolah"
+  },
 
   // Administrasi Mengajar
   {
@@ -41,6 +59,24 @@ const resources = [
     link: "/administrasi-mengajar/Contoh-Modul-Ajar-Kurmer.md",
     category: "mengajar"
   },
+  {
+    id: 103,
+    title: "RPP 1 Lembar",
+    description: "Contoh RPP inspiratif satu lembar untuk panduan mengajar ringkas.",
+    icon: FileText,
+    type: "Document",
+    link: "/administrasi-mengajar/RPP-1-Lembar.md",
+    category: "mengajar"
+  },
+  {
+    id: 104,
+    title: "Jurnal Mengajar Harian",
+    description: "Template spreadsheet untuk mencatat kegiatan harian guru.",
+    icon: Database,
+    type: "Spreadsheet",
+    link: "/administrasi-mengajar/Jurnal-Mengajar.csv",
+    category: "mengajar"
+  },
 
   // Administrasi Kelas
   {
@@ -50,6 +86,24 @@ const resources = [
     icon: Database,
     type: "Spreadsheet",
     link: "/administrasi-kelas/Template-Absensi-Jurnal.csv",
+    category: "kelas"
+  },
+  {
+    id: 105,
+    title: "Struktur Organisasi Kelas",
+    description: "Template pembuatan bagan struktur pengurus kelas.",
+    icon: Layers,
+    type: "Document",
+    link: "/administrasi-kelas/Struktur-Organisasi.md",
+    category: "kelas"
+  },
+  {
+    id: 106,
+    title: "Jadwal Piket Kelas",
+    description: "Contoh pembagian jadwal kebersihan harian ruang kelas.",
+    icon: FileText,
+    type: "Document",
+    link: "/administrasi-kelas/Jadwal-Piket.md",
     category: "kelas"
   },
 
@@ -81,6 +135,24 @@ const resources = [
     link: "/promp/Promp-Email-Resmi.txt",
     category: "promp"
   },
+  {
+    id: 107,
+    title: "Promp Penerjemah Konteks",
+    description: "Promp untuk menerjemahkan dokumen dengan mempertahankan konteks lokal.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp/Promp-Penerjemah.txt",
+    category: "promp"
+  },
+  {
+    id: 108,
+    title: "Promp Brainstorming Ide",
+    description: "Promp asisten kreatif untuk menggali ide dan inovasi baru.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp/Promp-Brainstorming.txt",
+    category: "promp"
+  },
 
   // Promp Pendidikan
   {
@@ -108,6 +180,24 @@ const resources = [
     icon: FileText,
     type: "Text",
     link: "/promp-pendidikan/Promp-Penilaian-Karakter.txt",
+    category: "promp-pendidikan"
+  },
+  {
+    id: 109,
+    title: "Promp Refleksi Pembelajaran",
+    description: "Promp untuk merancang pertanyaan refleksi pasca pembelajaran bagi siswa.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-pendidikan/Promp-Refleksi.txt",
+    category: "promp-pendidikan"
+  },
+  {
+    id: 110,
+    title: "Promp Diskusi Interaktif",
+    description: "Promp panduan memantik diskusi interaktif yang inklusif di kelas.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-pendidikan/Promp-Diskusi.txt",
     category: "promp-pendidikan"
   },
 
@@ -139,6 +229,24 @@ const resources = [
     link: "/promp-surreal/Promp-Dreamscape.txt",
     category: "promp-surreal"
   },
+  {
+    id: 111,
+    title: "Promp Dunia Cermin",
+    description: "Promp untuk menciptakan ilusi visual simetris bawah air dengan langit.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-surreal/Promp-Cermin.txt",
+    category: "promp-surreal"
+  },
+  {
+    id: 112,
+    title: "Promp Hutan Kristal",
+    description: "Promp seni surealis untuk elemen alam yang dipadukan dengan material geometris.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-surreal/Promp-Kristal.txt",
+    category: "promp-surreal"
+  },
 
   // Promp Gambar Poster
   {
@@ -166,6 +274,24 @@ const resources = [
     icon: FileText,
     type: "Text",
     link: "/promp-poster/Promp-Poster-Kemerdekaan.txt",
+    category: "promp-poster"
+  },
+  {
+    id: 113,
+    title: "Promp Poster Porseni",
+    description: "Promp untuk pembuatan poster acara pekan olahraga dan seni sekolah.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-poster/Promp-Poster-Porseni.txt",
+    category: "promp-poster"
+  },
+  {
+    id: 114,
+    title: "Promp Poster Literasi",
+    description: "Promp untuk membuat poster ajakan gemar membaca di perpustakaan.",
+    icon: FileText,
+    type: "Text",
+    link: "/promp-poster/Promp-Poster-Literasi.txt",
     category: "promp-poster"
   }
 ];

@@ -15,30 +15,11 @@ export async function onRequestPost(context: any) {
   const req = context.request;
   const env = context.env;
   
-  const cookieHeader = req.headers.get("Cookie") || "";
-  const match = cookieHeader.match(/auth_token=([^;]+)/);
-  const token = match ? match[1] : null;
-
-  if (!token) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401, headers: { "Content-Type": "application/json" } });
-  }
-
-  const secret = env.JWT_SECRET || "fallback-secret-key-for-local";
-  let user: any;
-  try {
-    const isValid = await jwt.verify(token, secret);
-    if (!isValid) throw new Error("Invalid token");
-    const decoded = jwt.decode(token);
-    user = decoded.payload;
-  } catch (err) {
-    return new Response(JSON.stringify({ error: "Invalid token" }), { status: 401, headers: { "Content-Type": "application/json" } });
-  }
-
   try {
     const body = await req.json();
-    const { role, text, cfTurnstileResponse } = body;
+    const { name, role, text, cfTurnstileResponse } = body;
 
-    if (!role || !text || !cfTurnstileResponse) {
+    if (!name || !role || !text || !cfTurnstileResponse) {
       return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400, headers: { "Content-Type": "application/json" } });
     }
 
@@ -58,9 +39,10 @@ export async function onRequestPost(context: any) {
     }
 
     // Insert into D1
+    const avatar = name.charAt(0).toUpperCase();
     const result = await env.DB.prepare(
       "INSERT INTO testimonials (name, role, text, avatar) VALUES (?, ?, ?, ?) RETURNING *"
-    ).bind(user.name, role, text, user.avatar).first();
+    ).bind(name, role, text, avatar).first();
 
     return new Response(JSON.stringify(result), { headers: { "Content-Type": "application/json" } });
   } catch (err: any) {

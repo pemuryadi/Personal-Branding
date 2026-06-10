@@ -11,6 +11,12 @@ type InfoItem = {
 const infoItems: InfoItem[] = [
   {
     icon: Newspaper,
+    title: "Akses Testimoni Publik Kini Dibuka!",
+    date: "Terbaru",
+    content: "Merespon tingginya antusiasme serta partisipasi masyarakat, kini fitur ulasan (testimoni) telah dibuka untuk publik tanpa memerlukan login. Pengunjung yang telah terbantu dengan platform ini dapat dengan mudah dan cepat memberikan tanggapan maupun cerita inspiratif mereka secara langsung."
+  },
+  {
+    icon: Newspaper,
     title: "Peluncuran Fitur Baru: Pengelolaan Kelas Berbasis AI",
     date: "Baru",
     content: "Merespon kebutuhan guru akan efisiensi waktu, kini hadir fitur pengelolaan kelas berbasis Artificial Intelligence (AI) yang terintegrasi langsung dengan sistem administrasi. Fitur ini dirancang untuk mempermudah guru dalam menganalisis perkembangan belajar siswa secara otomatis serta memberikan rekomendasi strategi pembelajaran yang lebih personal dan tepat sasaran."
