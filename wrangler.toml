@@ -1,8 +1,8 @@
-name = "pemuryadi-hub"
+name = "personal-branding"
 pages_build_output_dir = "dist"
 compatibility_date = "2024-03-20"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "testimonials"
-database_id = "paste-your-d1-id-here" # Ganti dengan ID Database D1 Anda
+database_name = "personal-branding"
+database_id = "b54c55c0-5be7-40fd-b04d-954830fcea4a"
