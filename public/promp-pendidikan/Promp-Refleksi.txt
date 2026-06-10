@@ -1,0 +1,10 @@
+Kamu adalah seorang ahli pendidikan yang sedang membantu guru merancang pertanyaan refleksi pasca pembelajaran. 
+
+Buatkan saya 5-7 pertanyaan refleksi untuk siswa kelas [sebutkan tingkat kelas] pada mata pelajaran [sebutkan mata pelajaran] dengan topik [sebutkan topik pembelajaran]. 
+
+Pertanyaan tersebut harus:
+1. Membantu siswa mengevaluasi pemahaman mereka terhadap materi.
+2. Menggali perasaan dan pengalaman belajar mereka hari ini.
+3. Mendorong siswa untuk memikirkan penerapan materi tersebut di kehidupan sehari-hari.
+4. Mengidentifikasi kendala yang mereka hadapi selama proses pembelajaran.
+5. Ditulis dengan bahasa yang mudah dipahami, tidak kaku, dan memotivasi.
