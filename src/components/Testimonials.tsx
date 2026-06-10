@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Quote, MessageSquare, X, LogIn, LogOut } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Quote, MessageSquare, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 interface Testimonial {
@@ -15,7 +15,6 @@ export function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [user, setUser] = useState<{name: string, avatar: string} | null>(null);
   const [turnstileToken, setTurnstileToken] = useState("");
 
   const fetchTestimonials = async () => {
@@ -30,29 +29,8 @@ export function Testimonials() {
     }
   };
 
-  const checkAuth = async () => {
-    try {
-      const res = await fetch("/api/auth/me");
-      if (res.ok) {
-        const data = await res.json();
-        setUser(data.user);
-      }
-    } catch (err) {
-      console.error("Failed to check auth", err);
-    }
-  };
-
   useEffect(() => {
     fetchTestimonials();
-    checkAuth().then(() => {
-      if (window.location.search.includes("login=success")) {
-        setIsModalOpen(true);
-        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
-      } else if (window.location.search.includes("login=error")) {
-        alert("Login Google gagal. Pastikan konfigurasi Client ID dan Secret di Cloudflare sudah benar dan sesuai dengan URL website Anda.");
-        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
-      }
-    });
 
     if (window.location.hash === '#testimoni') {
       setTimeout(() => {
@@ -60,11 +38,6 @@ export function Testimonials() {
       }, 500);
     }
   }, []);
-
-  const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    setUser(null);
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

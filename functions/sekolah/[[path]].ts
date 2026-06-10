@@ -22,6 +22,7 @@ export async function onRequest(context: any) {
     const response = await env.ASSETS.fetch(req);
     
     // Modify the HTML tags using HTMLRewriter
+    // @ts-ignore
     return new HTMLRewriter()
       .on('title', {
         element(element: any) {
