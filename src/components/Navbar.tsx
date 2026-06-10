@@ -37,9 +37,9 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
     { name: "Administrasi Mengajar", tab: "unduhan-mengajar" },
     { name: "Administrasi Kelas", tab: "unduhan-kelas" },
     { name: "Prompt", tab: "unduhan-promp" },
-    { name: "Prompt Pendidikan", tab: "unduhan-promp-pendidikan" },
-    { name: "Prompt Gambar Surreal", tab: "unduhan-promp-surreal" },
-    { name: "Prompt Poster", tab: "unduhan-promp-poster" },
+    { name: "Pendidikan", tab: "unduhan-promp-pendidikan", isSubItem: true },
+    { name: "Gambar Surreal", tab: "unduhan-promp-surreal", isSubItem: true },
+    { name: "Poster", tab: "unduhan-promp-poster", isSubItem: true },
   ];
 
   const handleTabClick = (tab: string) => {
@@ -91,9 +91,9 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
                         <button
                           key={dlink.name}
                           onClick={() => handleTabClick(dlink.tab)}
-                          className={`block w-full text-left px-4 py-3 text-[14px] font-[700] uppercase hover:bg-border transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-ink'}`}
+                          className={`block w-full text-left py-3 text-[14px] font-[700] uppercase hover:bg-border transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-ink'} ${dlink.isSubItem ? 'pl-8 pr-4 text-[12px] opacity-80' : 'px-4'}`}
                         >
-                          {dlink.name}
+                          {dlink.isSubItem ? `↳ ${dlink.name}` : dlink.name}
                         </button>
                       ))}
                     </div>
@@ -164,9 +164,9 @@ export function Navbar({ activeTab = 'home', setActiveTab = () => {} }: NavbarPr
                   <button
                     key={dlink.name}
                     onClick={() => handleTabClick(dlink.tab)}
-                    className={`block w-full text-left py-2 text-[14px] font-[700] uppercase transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-muted hover:text-ink'}`}
+                    className={`block w-full text-left py-2 text-[14px] font-[700] uppercase transition-colors ${activeTab === dlink.tab ? 'text-btn-bg' : 'text-muted hover:text-ink'} ${dlink.isSubItem ? 'pl-4 text-[12px] opacity-80' : ''}`}
                   >
-                    {dlink.name}
+                    {dlink.isSubItem ? `↳ ${dlink.name}` : dlink.name}
                   </button>
                 ))}
               </div>
