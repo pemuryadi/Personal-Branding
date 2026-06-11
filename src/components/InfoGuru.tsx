@@ -50,6 +50,30 @@ const infoItems: InfoItem[] = [
     title: "Perluasan Akses Wajib Belajar & Program ATS",
     date: "Segera Hadir",
     content: "Pemerintah menerbitkan regulasi terbaru (Perpres No. 3 Tahun 2026) untuk program Pencegahan dan Penanganan Anak Tidak Sekolah (ATS), menyasar hampir 192 ribu anak agar kembali mendapatkan pendidikan yang layak. Selain itu, cakupan Program Indonesia Pintar (PIP) kini diperluas untuk mencakup anak usia dini (PAUD), sejalan dengan penguatan wajib belajar 13 tahun untuk memutus rantai kemiskinan."
+  },
+  {
+    icon: GraduationCap,
+    title: "Program PPKPSP",
+    date: "Terbaru",
+    content: "Penguatan Pendidikan Karakter melalui Pembiasaan di Satuan Pendidikan (PPKPSP) merupakan kebijakan strategis (SEB Menteri Nomor 1 Tahun 2025) yang bertujuan membentuk karakter siswa yang cerdas, berbudi pekerti luhur, dan kuat melalui pembiasaan rutin di sekolah."
+  },
+  {
+    icon: BadgeCheck,
+    title: "Gerakan 7KAIH",
+    date: "Terbaru",
+    content: "Gerakan 7 Kebiasaan Anak Indonesia Hebat (7KAIH) adalah program inti yang berfokus pada pembiasaan tujuh perilaku positif: Bangun Pagi, Beribadah, Berolahraga, Makan Sehat dan Bergizi, Gemar Belajar, Bermasyarakat, dan Tidur Cepat."
+  },
+  {
+    icon: Newspaper,
+    title: "Pertemuan Pagi Ceria (PPC)",
+    date: "Terbaru",
+    content: "Pertemuan Pagi Ceria (PPC) merupakan implementasi konkret dari PPKPSP di sekolah. Kegiatan ini dilakukan sebelum pembelajaran dimulai, mencakup senam anak (Senam Anak Indonesia Hebat), menyanyikan lagu kebangsaan, dan berdoa bersama."
+  },
+  {
+    icon: Building2,
+    title: "Gerakan Kepanduan dan Ekstrakurikuler (GKE)",
+    date: "Terbaru",
+    content: "GKE adalah bagian dari intervensi penguatan karakter yang melibatkan kegiatan olah-bakat, olah-minat, dan pengembangan diri seperti pramuka, kegiatan kepemimpinan, pengembangan minat keagamaan, olahraga, dan seni."
   }
 ];
 
